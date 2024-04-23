@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-// use App\Http\Traits\UploadFile;
+use App\Http\Traits\UploadFile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
-	// use UploadFile;
+	use UploadFile;
 
 	public function home()
 	{
@@ -19,15 +19,12 @@ class ProductController extends Controller
 			->where('stock', '>', 0)
 			->get();
 
-		return view('home.vue', compact('products'));
+		return view('index', compact('products'));
 	}
-
-
-
 
 	public function index()
 	{
-		$products = Product::with('category')->whereHas('category')->get();
+		$products = Product::with('category', 'file')->whereHas('category')->get();
 		return view('products.index', compact('products'));
 	}
 

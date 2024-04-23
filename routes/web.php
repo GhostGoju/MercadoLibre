@@ -8,10 +8,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 
 Auth::routes();
-Route::get('/', [HomeController::class, 'index'])->name('home.vue');
+Route::get('/', [ProductController::class, 'home'])->name('products.home');
 
 Route::group(['middleware' => ['auth']], function () {
-	// Route::get('/home', [HomeController::class, 'index'])->name('home');
+	Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 	// Users
 	Route::group(['prefix' => 'users', 'middleware' => ['role:Admin'], 'controller' => UserController::class], function () {
@@ -23,14 +23,14 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::delete('/{user}', 'destroy')->name('users.destroy')->middleware('can:users.destroy');
 	});
 
-	// Products
-	Route::group(['prefix' => 'books', 'controller' => ProductController::class], function () {
-		Route::get('/', 'index')->name('books.index')->middleware('can:books.index');
-		Route::get('/show/{book}', 'show')->name('books.show')->middleware('can:books.show');
-		Route::post('/store', 'store')->name('books.store')->middleware('can:books.store');
-		Route::post('/update/{book}', 'update')->name('books.update')->middleware('can:books.update');
+	// Product
+	Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
+		Route::get('/', 'index')->name('products.index')->middleware('can:products.index');
+		Route::get('/show/{product}', 'show')->name('products.show')->middleware('can:products.show');
+		Route::post('/store', 'store')->name('books.store')->middleware('can:products.store');
+		Route::post('/update/{product}', 'update')->name('products.update')->middleware('can:products.update');
 		// Route::put('/{book}', 'update')->name('books.update')->middleware('can:books.update');
-		Route::delete('/{book}', 'destroy')->name('books.destroy')->middleware('can:books.destroy');
+		Route::delete('/{product}', 'destroy')->name('products.destroy')->middleware('can:products.destroy');
 	});
 
 

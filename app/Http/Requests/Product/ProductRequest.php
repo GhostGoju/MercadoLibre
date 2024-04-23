@@ -8,7 +8,7 @@ class ProductRequest extends FormRequest
 {
 
 	protected $rules = [
-		'title' => ['required', 'string'],
+		'name' => ['required', 'string'],
 		'description' => ['required', 'string'],
 		'stock' => ['required', 'numeric'],
 		'category_id' => ['required', 'exists:categories,id'],
@@ -28,8 +28,8 @@ class ProductRequest extends FormRequest
 	public function messages()
 	{
 		return [
-			'title.required' => 'El titulo es requerido.',
-			'title.string' => 'El nombre debe de ser valido.',
+			'name.required' => 'El titulo es requerido.',
+			'name.string' => 'El nombre debe de ser valido.',
 			'description.required' => 'La descripcion es requerida.',
 			'description.string' => 'La descripcion debe de ser valida.',
 			'stock.required' => 'La cantidad es requerida.',

@@ -2,42 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Spatie\Permission\Models\Role;
+use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
 {
-
-	public function index()
+	public function index(Request $request)
 	{
+		$users = User::with('roles')->get();
+		// dd($users[0]->toArray());
+		if (!$request->ajax()) return view('users.index', compact('users'));
 	}
-
 
 	public function create()
 	{
+		$roles = Role::all()->pluck('name');
+		return view('users.create', compact('roles'));
 	}
 
 
-	public function store(Request $request)
-	{
-	}
 
-	public function show($id)
+	public function store(UserRequest $request)
 	{
-	}
-
-
-	public function edit($id)
-	{
+		$user = new User($request->all());
+		$user->save();
+		$user->assignRole($request->role);
+		if (!$request->ajax()) return back()->with('success', 'User created');
 	}
 
 
-	public function update(Request $request, $id)
+	public function edit(User $user)
 	{
+		$roles = Role::all()->pluck('name');
+		return view('users.edit', compact('user', 'roles'));
 	}
 
 
-	public function destroy($id)
+	public function update(UserRequest $request, User $user)
 	{
+		$user->update($request->all());
+		$user->syncRoles([$request->role]);
+		if (!$request->ajax()) return back()->with('success', 'User updated');
+	}
+
+
+	public function destroy(Request $request, User $user)
+	{
+		$user->delete();
+		if (!$request->ajax()) return back()->with('success', 'User deleted');
 	}
 }

@@ -22,19 +22,19 @@ class Cart extends Model
 		'quantity' => 'integer',
 	];
 
-	// Mutador para calcular el precio total del producto en el carrito
+	// calcular el precio total del producto
 	public function getTotalPriceAttribute()
 	{
 		return $this->quantity * $this->product->price;
 	}
 
-	// Accesor para obtener el total de artículos en el carrito
+	// total de artículos en el carrito
 	public function getTotalItemsAttribute()
 	{
 		return $this->quantity;
 	}
 
-	// Accesor para obtener la descripción formateada del producto
+	// descripción formateada del producto
 	public function getFormatDescriptionAttribute()
 	{
 		return ucfirst(strtolower($this->product->description));
