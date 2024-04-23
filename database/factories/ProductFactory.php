@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+// use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -14,7 +15,7 @@ class ProductFactory extends Factory
 	{
 		return [
 			'category_id' => $this->faker->randomElement([1, 2, 3]),
-			'title' => $this->faker->sentence(),
+			'name' => $this->faker->word(),
 			'stock' => $this->faker->randomDigit(),
 			'description' => $this->faker->paragraph()
 		];

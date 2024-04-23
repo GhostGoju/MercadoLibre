@@ -195,7 +195,7 @@ return [
 		Yajra\DataTables\DataTablesServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-
+		Spatie\Permission\PermissionServiceProvider::class,
 	],
 
 	/*
