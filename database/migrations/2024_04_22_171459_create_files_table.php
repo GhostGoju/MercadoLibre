@@ -11,8 +11,8 @@ return new class extends Migration
 	{
 		Schema::create('files', function (Blueprint $table) {
 			$table->id();
-			$table->bigInteger('fileable_id')->unsigned(); // Id del modelo (1)(34)
-			$table->string('fileable_type'); // Modelo (Book)(User)
+			$table->bigInteger('fileable_id')->unsigned();
+			$table->string('fileable_type');
 			$table->string('route');
 			$table->timestamps();
 		});

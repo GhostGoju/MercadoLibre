@@ -18,7 +18,6 @@ class User extends Authenticatable
 	//? ESTOS SON TODOS LOS DATO QUE VENDRAN DE FUERA
 
 	protected $fillable = [
-		'number_id',
 		'name',
 		'last_name',
 		'email',

@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 	});
 
 
-	//? LIBROS
+	//? productos
 	Route::middleware('auth:sanctum')->get('/product', function (Request $request) {
 		return $request->product();
 	});

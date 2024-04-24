@@ -1,0 +1,92 @@
+<template>
+	<section>
+		<div class="card">
+			<div class="card-header d-flex justify-content-end">
+				<button class="btn btn-primary" @click="openModal">Crear Producto</button>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive my-4 mx-2">
+					<table class="table table-bordered" id="book_table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Email</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(user, index) in users" :key="index">
+								<td>{{ user.id }}</td>
+								<td>{{ user.name }}</td>
+								<td>{{ user.last_name }}</td>
+								<td>{{ user.email }}</td>
+								<td>
+									<div class="d-flex justify-content-center" title="Editar">
+										<button type="button" class="btn btn-warning btn-sm" @click="editProduct(product)">
+											<i class="fas fa-pencil-alt"></i>
+										</button>
+										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
+											@click="deletProduct(user)">
+											<i class="fas fa-trash-alt"></i>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+</template>
+
+<script>
+import UserModal from './UserModal.vue';
+import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
+
+export default {
+	components: {
+		UserModal
+	},
+	props: ['users'],
+	data() {
+		return {
+			modal: null,
+			user: {}
+		}
+	},
+	mounted() {
+		this.index()
+	},
+	methods: {
+		async index() {
+			$('#user_table').DataTable()
+			const modal_id = document.getElementById('user_modal')
+			this.modal = new bootstrap.Modal(modal_id)
+			modal_id.addEventListener('hidden.bs.modal', e => {
+				this.$refs.user_modal.reset()
+			})
+		},
+		editUser(user) {
+			this.product = user
+			this.openModal()
+		},
+		async deletUser({ id }) {
+			if (!await deleteMessage()) return
+			try {
+				await axios.delete(`/users/${id}`)
+				await successMessage({ is_delete: true, reload: true })
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		openModal() {
+			this.modal.show()
+		},
+	}
+}
+</script>
+
+

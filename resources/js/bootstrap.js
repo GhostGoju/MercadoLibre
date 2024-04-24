@@ -20,7 +20,7 @@ window._ = _
 window.Swal = Swal
 window.axios = axios
 window.bootstrap = bootstrap
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest' // ajax
 
 const csrf_token = document.head.querySelector('meta[name="csrf-token"]')
 if (csrf_token) {

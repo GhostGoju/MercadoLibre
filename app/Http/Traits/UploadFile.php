@@ -39,7 +39,7 @@ trait UploadFile
 	private function getRoute($model) 																	//? Genera rutas bases para los modelos
 	{
 		$routes = [
-			Product::class => 'images/Products',
+			Product::class => 'images/products',
 			User::class => 'images/users'
 		];
 		return $routes[get_class($model)] ?? 'images'; 													//? De no encontrar ninguna ruta lo almacena dentro de img

@@ -18,23 +18,16 @@ class UserRequest extends FormRequest
 		$rules = [
 			'name' => ['required', 'string'],
 			'last_name' => ['required', 'string'],
-			'number_id' => ['required', 'numeric'],
 			'email' => ['required', 'email'],
 			'password' => ['confirmed', 'string', 'min:8'],
 		];
 
 		if ($this->method() == 'POST') {
-			array_push($rules['number_id'], 'unique:users,number_id');
 			array_push($rules['email'], 'unique:users,email');
 			array_push($rules['password'], 'required');
 		} else {
-			array_push($rules['number_id'], 'unique:users,number_id,' . $this->user->id);
 			array_push($rules['email'], 'unique:users,email,' . $this->user->id);
 			array_push($rules['password'], 'nullable');
-		}
-
-		if ($this->path() != 'api/register') {
-			$rules['role'] = ['required', 'string', 'in:User,Admin'];
 		}
 
 		return $rules;

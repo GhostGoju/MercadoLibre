@@ -9,6 +9,7 @@
 					<table class="table table-bordered" id="book_table">
 						<thead>
 							<tr>
+								<th>ID</th>
 								<th>Nombre</th>
 								<th>Categoria</th>
 								<th>Cantidad</th>
@@ -17,12 +18,14 @@
 						</thead>
 						<tbody>
 							<tr v-for="(product, index) in products" :key="index">
+								<td>{{ product.id }}</td>
 								<td>{{ product.name }}</td>
 								<td>{{ product.category.name }}</td>
 								<td>{{ product.stock }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
-										<button type="button" class="btn btn-warning btn-sm" @click="editProduct(product)">
+										<button type="button" class="btn btn-warning btn-sm"
+											@click="editProduct(product)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
@@ -86,5 +89,3 @@ export default {
 	}
 }
 </script>
-
-

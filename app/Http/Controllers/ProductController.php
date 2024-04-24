@@ -8,17 +8,17 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 
-class ProductController extends Controller
+class productController extends Controller
 {
 	use UploadFile;
 
 	public function home()
 	{
-		$products = Product::with('category') //'file' despues
+		$products = Product::with('category', 'file')
 			->whereHas('category')
 			->where('stock', '>', 0)
 			->get();
-
+		// dd($products[0]->toArray());
 		return view('index', compact('products'));
 	}
 
@@ -36,7 +36,6 @@ class ProductController extends Controller
 			$product->save();
 			$this->uploadFile($product, $request);
 			DB::commit();
-			return response()->json([], 200);
 		} catch (\Throwable $th) {
 			DB::rollback();
 			throw $th;
@@ -45,7 +44,6 @@ class ProductController extends Controller
 
 	public function show(Product $product)
 	{
-		return response()->json(['product' => $product], 200);
 	}
 
 	public function update(ProductUpdateRequest $request, Product $product)
@@ -55,7 +53,6 @@ class ProductController extends Controller
 			$product->update($request->all());
 			$this->uploadFile($product, $request);
 			DB::commit();
-			return response()->json([], 204);
 		} catch (\Throwable $th) {
 			DB::rollback();
 			throw $th;
@@ -66,6 +63,5 @@ class ProductController extends Controller
 	{
 		$product->delete();
 		$this->deleteFile($product);
-		return response()->json([], 204);
 	}
 }

@@ -1,6 +1,6 @@
 <x-app title="Inicio">
     <section class="my-3 d-flex justify-content-center">
-        <h1>Listado de Productos</h1>
+        <h1>HOME</h1>
     </section>
 
     <section class="d-flex flex-wrap justify-content-center">
@@ -10,16 +10,19 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $product->name }}</h5>
                     <p class="card-text">{{ $product->format_description }}</p>
-                    <div class="d-flex flex-wrap">
+                    <div class="row">
                         <span class="mt-2">
                             <strong>Categoria: </strong> {{ $product->category->name }}
+                        </span>
+                        <span class=".col-md">
+                            <strong>Unidades Disponibles: </strong> {{ $product->stock }}
                         </span>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="d-grid gap-2">
                         <button class="btn btn-outline-success mt-2" type="button">
-                            Solicitar
+                            VER
                         </button>
                     </div>
                 </div>

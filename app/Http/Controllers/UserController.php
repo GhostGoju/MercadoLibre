@@ -12,7 +12,7 @@ class UserController extends Controller
 	public function index(Request $request)
 	{
 		$users = User::with('roles')->get();
-		// dd($users[0]->toArray());
+		// dd($users[9]->toArray());
 		if (!$request->ajax()) return view('users.index', compact('users'));
 	}
 
