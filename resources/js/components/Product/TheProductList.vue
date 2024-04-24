@@ -12,7 +12,7 @@
 								<th>ID</th>
 								<th>Nombre</th>
 								<th>Categoria</th>
-								<th>Cantidad</th>
+								<th>Unidades</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
