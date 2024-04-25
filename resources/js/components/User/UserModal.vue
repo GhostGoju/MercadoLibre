@@ -1,5 +1,5 @@
 <template>
-	<div class="modal fade" id="product_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	<div class="modal fade" id="user_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 		aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -30,25 +30,25 @@
 
 							<!-- Last Name -->
 							<div class="col-12">
-								<label for="name">Apellidos</label>
-								<Field name="name" v-slot="{ errorMessage, field }" v-model="user.name">
-									<input type="text" id="name" v-model="user.name"
-										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
+								<label for="last_name">Apellidos</label>
+								<Field name="last_name" v-slot="{ errorMessage, field }" v-model="user.last_name">
+									<input type="text" id="last_name" v-model="user.last_name"
+										:class="`form-control ${errorMessage || back_errors['last_name'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['name'] }}</span>
+									<span class="invalid-feedback">{{ back_errors['last_name'] }}</span>
 								</Field>
 							</div>
 
 							<!-- Email -->
 							<div class="col-12">
-								<label for="name">Email</label>
-								<Field name="name" v-slot="{ errorMessage, field }" v-model="user.name">
-									<input type="text" id="name" v-model="user.name"
-										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
+								<label for="email">Email</label>
+								<Field name="email" v-slot="{ errorMessage, field }" v-model="user.email">
+									<input type="emails" id="email" v-model="user.email"
+										:class="`form-control ${errorMessage || back_errors['email'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['name'] }}</span>
+									<span class="invalid-feedback">{{ back_errors['email'] }}</span>
 								</Field>
 							</div>
 
@@ -56,22 +56,15 @@
 
 							<!-- Passwords -->
 							<div class="col-12">
-								<label for="name">Password</label>
-								<Field name="name" v-slot="{ errorMessage, field }" v-model="user.name">
-									<input type="text" id="name" v-model="user.name"
-										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
+								<label for="password">Password</label>
+								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
+									<input type="password" id="password" v-model="user.password"
+										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['name'] }}</span>
+									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
 								</Field>
 							</div>
-
-
-
-
-
-
-
 
 						</section>
 					</div>
@@ -79,7 +72,7 @@
 					<!-- Buttons -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="sumbit" class="btn btn-primary">Almacenar</button>
+						<button type="submit" class="btn btn-primary">Almacenar</button>
 					</div>
 				</Form>
 			</div>
@@ -107,9 +100,9 @@ export default {
 		schema() {
 			return yup.object({
 				name: yup.string().required(),
-				stock: yup.number().required().positive().integer(),
-				description: yup.string(),
-				category: yup.string().required()
+				last_name: yup.string().required(),
+				email: yup.string().required(),
+				password: yup.string().required()
 			});
 		},
 	},
@@ -118,11 +111,11 @@ export default {
 			is_create: true,
 			user: {
 			},
-			category: null,
-			categories_data: [],
-			load_category: false,
+			name: null,
+			last_name: null,
+			email: null,
+			password: null,
 			back_errors: {},
-
 		}
 	},
 	created() {
@@ -141,26 +134,17 @@ export default {
 				this.back_errors = await handlerErrors(error)
 			}
 		},
-		createFormData(data) {
-			const form_data = new FormData()
-			if (this.file) form_data.append('file', this.file, this.file.name)
-			for (const prop in data) {
-				form_data.append(prop, data[prop])
-			}
-			return form_data
-		},
 		reset() {
 			this.is_create = true
 			this.user = {}
+			this.name = null
+			this.last_name = null
+			this.email = null
+			this.password = null
 			this.$parent.user = {}
 			this.back_errors = {}
-			this.file = null
-			this.image_preview = '/storage/images/users/default.png'
-			document.getElementById('file').value = ''
 			setTimeout(() => this.$refs.form.resetForm(), 100);
-
 		}
-
 	}
 }
 </script>

@@ -2,27 +2,29 @@
 	<section>
 		<div class="card">
 			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="openModal">Crear Categorias</button>
+				<button class="btn btn-primary" @click="openModal">Crear Categoria</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
-					<table class="table table-bordered" id="book_table">
+					<table class="table table-bordered" id="product_table">
 						<thead>
 							<tr>
+								<th>ID</th>
 								<th>Nombre</th>
-								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="(category, index) in categories" :key="index">
+								<td>{{ category.id }}</td>
 								<td>{{ category.name }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
-										<button type="button" class="btn btn-warning btn-sm" @click="editCategory(category)">
+										<button type="button" class="btn btn-warning btn-sm"
+											@click="editCategory(category)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
-											@click="deletCategory(category)">
+											@click="deleteCategory(category)">
 											<i class="fas fa-trash-alt"></i>
 										</button>
 									</div>
@@ -64,10 +66,10 @@ export default {
 			})
 		},
 		editCategory(category) {
-			this.category = category
+			this.category= category
 			this.openModal()
 		},
-		async deletCategory({ id }) {
+		async deleteategory({ id }) {
 			if (!await deleteMessage()) return
 			try {
 				await axios.delete(`/categories/${id}`)
@@ -82,5 +84,3 @@ export default {
 	}
 }
 </script>
-
-

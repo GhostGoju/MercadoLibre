@@ -3,7 +3,9 @@
         <div class="d-flex justify-content-center my-4">
             <h1>Tabla Usuarios</h1>
         </div>
+
         <the-user-list :users="{{ $users }}"/>
     </section>
 
 </x-app>
+

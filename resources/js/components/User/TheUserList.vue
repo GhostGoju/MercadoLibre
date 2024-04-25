@@ -2,11 +2,11 @@
 	<section>
 		<div class="card">
 			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="openModal">Crear Producto</button>
+				<button class="btn btn-primary" @click="openModal">Crear Usuario</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
-					<table class="table table-bordered" id="book_table">
+					<table class="table table-bordered" id="user_table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -23,12 +23,13 @@
 								<td>{{ user.last_name }}</td>
 								<td>{{ user.email }}</td>
 								<td>
-									<div class="d-flex justify-content-center" title="Editar">
-										<button type="button" class="btn btn-warning btn-sm" @click="editProduct(product)">
+									<div class="d-flex justify-content-center">
+										<button type="button" class="btn btn-warning btn-sm" title="Editar"
+										@click="editUser(user)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
-											@click="deletProduct(user)">
+											@click="deleteUser(user)">
 											<i class="fas fa-trash-alt"></i>
 										</button>
 									</div>
@@ -43,6 +44,7 @@
 </template>
 
 <script>
+
 import UserModal from './UserModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
@@ -70,10 +72,10 @@ export default {
 			})
 		},
 		editUser(user) {
-			this.product = user
+			this.user = user
 			this.openModal()
 		},
-		async deletUser({ id }) {
+		async deleteUser({ id }) {
 			if (!await deleteMessage()) return
 			try {
 				await axios.delete(`/users/${id}`)
@@ -88,5 +90,3 @@ export default {
 	}
 }
 </script>
-
-

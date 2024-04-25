@@ -4,7 +4,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Producto</h5>
+					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} producto</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
@@ -17,8 +17,7 @@
 
 							<!-- Image -->
 							<div class="col-12 d-flex justify-content-center mt-1">
-								<img :src="image_preview" alt="Imagen Libro" class="img-thumbnail" width="170"
-									height="170">
+								<img :src="image_preview" alt="Imagen Producto" class="img-thumbnail" width="170" height="170">
 							</div>
 
 							<!-- Load Image -->
@@ -31,11 +30,11 @@
 								</span>
 							</div>
 
-							<!-- Title -->
-							<div class="col-12">
+							<!-- Nombre -->
+							<div class="col-12 mt-2">
 								<label for="name">Nombre</label>
 								<Field name="name" v-slot="{ errorMessage, field }" v-model="product.name">
-									<input type="text" id="title" v-model="product.name"
+									<input type="text" id="name" v-model="product.name"
 										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
@@ -48,23 +47,8 @@
 								<Field name="stock" v-slot="{ errorMessage, field }" v-model="product.stock">
 									<label for="stock">Cantidad</label>
 									<input type="number" id="stock" v-model="product.stock"
-										:class="`form-control ${errorMessage || back_errors['stock'] ? 'is-invalid' : ''}`"
-										v-bind="field">
+										:class="`form-control ${errorMessage ? 'is-invalid' : ''}`" v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['stock'] }}</span>
-								</Field>
-							</div>
-
-							<!-- Description -->
-							<div class="col-12 mt-2">
-								<Field name="description" v-slot="{ errorMessage, field }"
-									v-model="product.description">
-									<label for="description">Descripcion</label>
-									<textarea v-model="product.description"
-										:class="`form-control ${errorMessage || back_errors['description'] ? 'is-invalid' : ''}`"
-										id="description" rows="3" v-bind="field"></textarea>
-									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['description'] }}</span>
 								</Field>
 							</div>
 
@@ -76,11 +60,10 @@
 									<v-select id="category" :options="categories_data" v-model="category"
 										:reduce="category => category.id" v-bind="field" label="name"
 										placeholder="Selecciona categoria" :clearable="false"
-										:class="`${errorMessage || back_errors['category_id'] ? 'is-invalid' : ''}`">
+										:class="`${errorMessage ? 'is-invalid' : ''}`">
 									</v-select>
-
 									<span class="invalid-feedback" v-if="!valid">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['category_id'] }}</span>
+
 								</Field>
 							</div>
 						</section>
@@ -89,7 +72,7 @@
 					<!-- Buttons -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="sumbit" class="btn btn-primary">Almacenar</button>
+						<button type="submit" class="btn btn-primary">Almacenar</button>
 					</div>
 				</Form>
 			</div>

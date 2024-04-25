@@ -2,17 +2,17 @@
 	<section>
 		<div class="card">
 			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="openModal">Crear Producto</button>
+				<button class="btn btn-primary" @click="openModal">Crear producto</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
-					<table class="table table-bordered" id="book_table">
+					<table class="table table-bordered" id="product_table">
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
+								<th>Stock</th>
 								<th>Categoria</th>
-								<th>Unidades</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -20,8 +20,8 @@
 							<tr v-for="(product, index) in products" :key="index">
 								<td>{{ product.id }}</td>
 								<td>{{ product.name }}</td>
-								<td>{{ product.category.name }}</td>
 								<td>{{ product.stock }}</td>
+								<td>{{ product.category.name }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
 										<button type="button" class="btn btn-warning btn-sm"
@@ -29,7 +29,7 @@
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
-											@click="deletProduct(product)">
+											@click="deleteProduct(product)">
 											<i class="fas fa-trash-alt"></i>
 										</button>
 									</div>
@@ -74,7 +74,7 @@ export default {
 			this.product = product
 			this.openModal()
 		},
-		async deletProduct({ id }) {
+		async deleteProduct({ id }) {
 			if (!await deleteMessage()) return
 			try {
 				await axios.delete(`/products/${id}`)

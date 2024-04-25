@@ -12,7 +12,6 @@ class UserController extends Controller
 	public function index(Request $request)
 	{
 		$users = User::with('roles')->get();
-		// dd($users[9]->toArray());
 		if (!$request->ajax()) return view('users.index', compact('users'));
 	}
 
@@ -21,7 +20,6 @@ class UserController extends Controller
 		$roles = Role::all()->pluck('name');
 		return view('users.create', compact('roles'));
 	}
-
 
 
 	public function store(UserRequest $request)
@@ -46,7 +44,6 @@ class UserController extends Controller
 		$user->syncRoles([$request->role]);
 		if (!$request->ajax()) return back()->with('success', 'User updated');
 	}
-
 
 	public function destroy(Request $request, User $user)
 	{

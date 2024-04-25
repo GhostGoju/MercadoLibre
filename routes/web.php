@@ -15,22 +15,21 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 	// Users
-	Route::group(['prefix' => 'users', 'middleware' => ['role:Admin'], 'controller' => UserController::class], function () {
+	Route::group(['prefix' => 'users', 'controller' => UserController::class], function () {
 		Route::get('/', 'index')->name('users.index')->middleware('can:users.index');
-		Route::get('/create', 'create')->name('users.create')->middleware('can:users.create');
-		Route::post('/', 'store')->name('users.store')->middleware('can:users.store');
-		Route::get('/{user}/edit', 'edit')->name('users.edit')->middleware('can:users.edit');
+		Route::post('/store', 'store')->name('users.store')->middleware('can:users.store');
+		Route::post('/update/{user}', 'update')->name('users.update')->middleware('can:users.update');
 		Route::put('/{user}', 'update')->name('users.update')->middleware('can:users.update');
 		Route::delete('/{user}', 'destroy')->name('users.destroy')->middleware('can:users.destroy');
 	});
+
 
 	// Product
 	Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
 		Route::get('/', 'index')->name('products.index')->middleware('can:products.index');
 		Route::get('/show/{product}', 'show')->name('products.show')->middleware('can:products.show');
-		Route::post('/store', 'store')->name('books.store')->middleware('can:products.store');
+		Route::post('/store', 'store')->name('products.store')->middleware('can:products.store');
 		Route::post('/update/{product}', 'update')->name('products.update')->middleware('can:products.update');
-		Route::put('/{book}', 'update')->name('books.update')->middleware('can:books.update');
 		Route::delete('/{product}', 'destroy')->name('products.destroy')->middleware('can:products.destroy');
 	});
 
