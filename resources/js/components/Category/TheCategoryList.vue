@@ -6,11 +6,12 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
-					<table class="table table-bordered" id="product_table">
+					<table class="table table-bordered" id="category_table">
 						<thead>
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
+								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,6 +34,7 @@
 						</tbody>
 					</table>
 				</div>
+				<!-- <category-modal/> -->
 			</div>
 		</div>
 	</section>
@@ -69,7 +71,7 @@ export default {
 			this.category= category
 			this.openModal()
 		},
-		async deleteategory({ id }) {
+		async deleteCategory({ id }) {
 			if (!await deleteMessage()) return
 			try {
 				await axios.delete(`/categories/${id}`)

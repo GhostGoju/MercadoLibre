@@ -29,8 +29,8 @@
                     @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">
-								Registro
-							</a>
+                                Registro
+                            </a>
                         </li>
                     @endif
                 @else
@@ -54,14 +54,18 @@
                                     Productos
                                 </a>
                             @endrole
-                            @can('categories.index')
-                                {{-- Category --}}
+                            @role('Admin')
+                                {{-- Book --}}
                                 <a class="dropdown-item" href="{{ route('categories.index') }}">
                                     Categorias
                                 </a>
-                            @endcan
+                            @endrole
 
 
+                            {{-- cart --}}
+                            <a class="dropdown-item" href="{{ route('carts.index') }}">
+                                Carrito
+                            </a>
                             {{-- Logout --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

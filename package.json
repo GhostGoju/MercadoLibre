@@ -10,7 +10,7 @@
 		"@popperjs/core": "^2.11.6",
 		"@vitejs/plugin-vue": "^4.0.0",
 		"axios": "^1.6.8",
-		"bootstrap": "^5.2.3",
+		"bootstrap": "^5.3.3",
 		"datatables.net-bs5": "^1.13.11",
 		"datatables.net-buttons-bs5": "^2.4.3",
 		"datatables.net-select-bs5": "^1.5.0",

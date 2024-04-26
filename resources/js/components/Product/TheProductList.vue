@@ -38,6 +38,7 @@
 						</tbody>
 					</table>
 				</div>
+				<product-modal :categories_data="categories_data" :product_data="product" ref="product_modal" />
 			</div>
 		</div>
 	</section>
@@ -51,7 +52,7 @@ export default {
 	components: {
 		ProductModal
 	},
-	props: ['products'],
+	props: ['products','categories_data'],
 	data() {
 		return {
 			modal: null,

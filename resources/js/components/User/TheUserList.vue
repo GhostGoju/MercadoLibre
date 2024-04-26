@@ -38,6 +38,7 @@
 						</tbody>
 					</table>
 				</div>
+				<user-modal/>
 			</div>
 		</div>
 	</section>

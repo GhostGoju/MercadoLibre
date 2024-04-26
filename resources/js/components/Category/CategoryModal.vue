@@ -67,6 +67,12 @@ export default {
 	data() {
 		return {
 			is_create: true,
+			category: {
+			},
+			category: null,
+			categories_data: [],
+			load_category: false,
+			back_errors: {},s
 		}
 	},
 	created() {
@@ -76,23 +82,30 @@ export default {
 	methods: {
 
 		async saveCategory() {
-    try {
-        this.category;
-        const category = this.createFormData(this.category);
-        if (this.is_create) {
-            await axios.post('/categories/store', category);
-        } else {
-            await axios.put(`/categories/update/${this.category.id}`, category);
-        }
-        await successMessage({ reload: true });
-    } catch (error) {
-        this.back_errors = await handlerErrors(error);
-    }
-},
+			try {
+				const category = this.createFormData(this.category)
+				if (this.is_create) await axios.post('/categories/store', category)
+				else await axios.post(`/categories/update/${this.category.id}`, category)
+				await successMessage({ reload: true })
+			} catch (error) {
+				this.back_errors = await handlerErrors(error)
+			}
+		},
+
+		createFormData(data) {
+			const form_data = new FormData()
+			for (const prop in data) {
+				form_data.append(prop, data[prop])
+			}
+			return form_data
+		},
+
 
 		reset() {
 			this.is_create = true
 			this.category = {}
+			this.$parent.category = {}
+			this.back_errors = {}
 			setTimeout(() => this.$refs.form.resetForm(), 100);
 		}
 

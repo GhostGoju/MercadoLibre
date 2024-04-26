@@ -16,30 +16,16 @@ class Cart extends Model
 		'quantity',
 	];
 
-	protected $appends = ['total_price'];
 
-	protected $casts = [
-		'quantity' => 'integer',
-	];
-
-	// calcular el precio total del producto
 	public function getTotalPriceAttribute()
 	{
 		return $this->quantity * $this->product->price;
 	}
 
-	// total de artículos en el carrito
 	public function getTotalItemsAttribute()
 	{
 		return $this->quantity;
 	}
-
-	// descripción formateada del producto
-	public function getFormatDescriptionAttribute()
-	{
-		return ucfirst(strtolower($this->product->description));
-	}
-
 
 
 

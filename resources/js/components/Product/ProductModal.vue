@@ -52,6 +52,18 @@
 								</Field>
 							</div>
 
+							<!-- Description -->
+							<div class="col-12 mt-2">
+								<label for="description">Descripcion</label>
+								<Field name="description" v-slot="{ errorMessage, field }" v-model="product.description">
+									<input type="text" id="description" v-model="product.description"
+										:class="`form-control ${errorMessage || back_errors['description'] ? 'is-invalid' : ''}`"
+										v-bind="field">
+									<span class="invalid-feedback">{{ errorMessage }}</span>
+									<span class="invalid-feedback">{{ back_errors['description'] }}</span>
+								</Field>
+							</div>
+
 							<!-- Category -->
 							<div class="col-12 mt-2" v-if="load_category">
 								<Field name="category" v-slot="{ errorMessage, field, valid }" v-model="category">
@@ -63,7 +75,6 @@
 										:class="`${errorMessage ? 'is-invalid' : ''}`">
 									</v-select>
 									<span class="invalid-feedback" v-if="!valid">{{ errorMessage }}</span>
-
 								</Field>
 							</div>
 						</section>
@@ -87,7 +98,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['product_data'],
+	props: ['product_data', 'categories_data'],
 	components: { Field, Form },
 	watch: {
 		product_data(new_value) {
@@ -103,8 +114,8 @@ export default {
 			return yup.object({
 				name: yup.string().required(),
 				stock: yup.number().required().positive().integer(),
-				description: yup.string(),
-				category: yup.string().required()
+				category: yup.string().required(),
+				description: yup.string().required(),
 			});
 		},
 	},
@@ -168,10 +179,9 @@ export default {
 			this.$parent.product = {}
 			this.back_errors = {}
 			this.file = null
-			this.image_preview = '/storage/images/products/default.png'
+			this.image_preview ='/storage/images/products/default.png'
 			document.getElementById('file').value = ''
 			setTimeout(() => this.$refs.form.resetForm(), 100);
-
 		}
 
 	}

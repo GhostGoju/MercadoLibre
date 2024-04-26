@@ -11,13 +11,15 @@ class CategoryController extends Controller
 	public function index(Request $request)
 	{
 		$categories = Category::get();
-		return view('categories.index', compact('categories'));
+		if (!$request->ajax()) return view('categories.index');
+		return response()->json(['categories' => $categories], 200);
 	}
 
 	public function store(Request $request)
 	{
 		$category = new Category($request->all());
 		$category->save();
+		return response()->json([], 200);
 	}
 
 	public function getAll()
@@ -29,6 +31,7 @@ class CategoryController extends Controller
 
 	public function show(Category $category)
 	{
+		return response()->json(['category' => $category], 200);
 	}
 
 	public function update(Request $request, $id)
@@ -39,5 +42,6 @@ class CategoryController extends Controller
 	public function destroy(Category $category)
 	{
 		$category->delete();
+		return response()->json([], 204);
 	}
 }
