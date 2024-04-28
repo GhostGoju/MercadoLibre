@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -38,17 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
 	// Category
 	Route::group(['prefix' => 'categories', 'controller' => CategoryController::class], function () {
 		Route::get('/', 'index')->name('categories.index')->middleware('can:categories.index');
-		Route::get('/get-all', 'index')->name('categories.get-all')->middleware('can:categories.get-all');
-		Route::get('/get-all-dt', 'getAll')->name('categories.get-all-dt');
-		Route::get('/{category}', 'show')->name('categories.show');
-		Route::post('/', 'store')->name('categories.store')->middleware('can:categories.store');
-		Route::put('/{category}', 'update')->name('categories.update')->middleware('can:categories.update');
+		Route::get('/show/{category}', 'show')->name('categories.show')->middleware('can:categories.show');
+		Route::post('/store', 'store')->name('categories.store')->middleware('can:categories.store');
+		Route::post('/update/{category}', 'update')->name('categories.update')->middleware('can:categories.update');
 		Route::delete('/{category}', 'destroy')->name('categories.destroy')->middleware('can:categories.destroy');
-	});
-
-
-	// Cart
-	Route::group(['prefix' => 'carts', 'controller' => CartController::class], function () {
-		Route::get('/', 'index')->name('carts.index')->middleware('can:carts.index');
 	});
 });

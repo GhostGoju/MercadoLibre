@@ -2,7 +2,7 @@
 	<section>
 		<div class="card">
 			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="openModal">Crear Usuario</button>
+				<button class="btn btn-primary" @click="openModal">Crear usuario</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
@@ -13,6 +13,7 @@
 								<th>Nombre</th>
 								<th>Apellido</th>
 								<th>Email</th>
+								<th>Rol</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -21,11 +22,11 @@
 								<td>{{ user.id }}</td>
 								<td>{{ user.name }}</td>
 								<td>{{ user.last_name }}</td>
-								<td>{{ user.email }}</td>
+								<td>{{ user.email }}</td> <!-- Agrega el campo email -->
+								<td>{{ user.roles[0].name }}</td> <!-- Accede al nombre del rol -->
 								<td>
-									<div class="d-flex justify-content-center">
-										<button type="button" class="btn btn-warning btn-sm" title="Editar"
-										@click="editUser(user)">
+									<div class="d-flex justify-content-center" title="Editar">
+										<button type="button" class="btn btn-warning btn-sm" @click="edituser(user)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
@@ -38,14 +39,13 @@
 						</tbody>
 					</table>
 				</div>
-				<user-modal/>
+				<product-modal :user="users" ref="user_modal" />
 			</div>
 		</div>
 	</section>
 </template>
 
 <script>
-
 import UserModal from './UserModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
@@ -57,7 +57,7 @@ export default {
 	data() {
 		return {
 			modal: null,
-			user: {}
+			product: {}
 		}
 	},
 	mounted() {
@@ -73,7 +73,7 @@ export default {
 			})
 		},
 		editUser(user) {
-			this.user = user
+			this.user = user;
 			this.openModal()
 		},
 		async deleteUser({ id }) {

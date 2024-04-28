@@ -11,7 +11,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-
+                <!-- Barra de búsqueda -->
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"
+                        id="searchInput">
+                </form>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -55,17 +59,13 @@
                                 </a>
                             @endrole
                             @role('Admin')
-                                {{-- Book --}}
+                                {{-- Category --}}
                                 <a class="dropdown-item" href="{{ route('categories.index') }}">
                                     Categorias
                                 </a>
                             @endrole
 
 
-                            {{-- cart --}}
-                            <a class="dropdown-item" href="{{ route('carts.index') }}">
-                                Carrito
-                            </a>
                             {{-- Logout --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -83,3 +83,24 @@
         </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchInput');
+        const productList = document.getElementById('productList');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.trim().toLowerCase();
+
+            Array.from(productList.children).forEach(function(product) {
+                const productName = product.querySelector('.card-title').textContent
+                    .toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>

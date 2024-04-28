@@ -4,7 +4,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Usuarios</h5>
+					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} usuario</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
@@ -15,22 +15,20 @@
 					<div class="modal-body">
 						<section class="row">
 
-							<!-- Name -->
-							<div class="col-12">
+							<!-- Nombre -->
+							<div class="col-12 mt-2">
 								<label for="name">Nombre</label>
-								<Field name="name" v-slot="{ errorMessage, field }" v-model="user.name">
-									<input type="text" id="name" v-model="user.name"
+								<Field name="name" v-slot="{ errorMessage, field }" v-model="product.name">
+									<input type="text" id="name" v-model="product.name"
 										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
 									<span class="invalid-feedback">{{ back_errors['name'] }}</span>
 								</Field>
 							</div>
-
-
-							<!-- Last Name -->
-							<div class="col-12">
-								<label for="last_name">Apellidos</label>
+							<!-- apellido -->
+							<div class="col-12 mt-2">
+								<label for="last_name">Nombre</label>
 								<Field name="last_name" v-slot="{ errorMessage, field }" v-model="user.last_name">
 									<input type="text" id="last_name" v-model="user.last_name"
 										:class="`form-control ${errorMessage || back_errors['last_name'] ? 'is-invalid' : ''}`"
@@ -39,12 +37,11 @@
 									<span class="invalid-feedback">{{ back_errors['last_name'] }}</span>
 								</Field>
 							</div>
-
-							<!-- Email -->
-							<div class="col-12">
+							<!-- email -->
+							<div class="col-12 mt-2">
 								<label for="email">Email</label>
 								<Field name="email" v-slot="{ errorMessage, field }" v-model="user.email">
-									<input type="emails" id="email" v-model="user.email"
+									<input type="email" id="email" v-model="user.email"
 										:class="`form-control ${errorMessage || back_errors['email'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
@@ -54,18 +51,19 @@
 
 
 
-							<!-- Passwords -->
-							<div class="col-12">
-								<label for="password">Password</label>
-								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
-									<input type="password" id="password" v-model="user.password"
-										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`"
-										v-bind="field">
-									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
+							<!-- Role -->
+							<div class="col-12 mt-2" v-if="load_role">
+								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
+									<label for="role">Rol</label>
+
+									<v-select id="category" :options="categories_data" v-model="role"
+										:reduce="role => role.id" v-bind="field" label="role"
+										placeholder="Selecciona Rol" :clearable="false"
+										:class="`${errorMessage ? 'is-invalid' : ''}`">
+									</v-select>
+									<span class="invalid-feedback" v-if="!valid">{{ errorMessage }}</span>
 								</Field>
 							</div>
-
 						</section>
 					</div>
 
@@ -87,13 +85,14 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['user_data'],
+	props: ['role_data', 'user_data'],
 	components: { Field, Form },
 	watch: {
 		user_data(new_value) {
 			this.user = { ...new_value }
 			if (!this.user.id) return
 			this.is_create = false
+			this.role = this.user.role_id
 		}
 	},
 	computed: {
@@ -102,7 +101,8 @@ export default {
 				name: yup.string().required(),
 				last_name: yup.string().required(),
 				email: yup.string().required(),
-				password: yup.string().required()
+				password: yup.string().required(),
+				role: yup.string().required(),
 			});
 		},
 	},
@@ -111,10 +111,9 @@ export default {
 			is_create: true,
 			user: {
 			},
-			name: null,
-			last_name: null,
-			email: null,
-			password: null,
+			category: null,
+			categories_data: [],
+			load_category: false,
 			back_errors: {},
 		}
 	},
@@ -123,28 +122,53 @@ export default {
 	},
 
 	methods: {
-
-		async saveUser() {
+		index() {
+			this.getRoles()
+		},
+		previewImage(envent) {
+			this.file = envent.target.files[0]
+			this.image_preview = URL.createObjectURL(this.file)
+		},
+		async saveProduct() {
 			try {
-				const user = this.createFormData(this.user)
-				if (this.is_create) await axios.post('/users/store', user)
-				else await axios.post(`/user/update/${this.user.id}`, user)
+				this.product.category_id = this.category
+				const product = this.createFormData(this.product)
+				if (this.is_create) await axios.post('/products/store', product)
+				else await axios.post(`/products/update/${this.product.id}`, product)
 				await successMessage({ reload: true })
 			} catch (error) {
 				this.back_errors = await handlerErrors(error)
 			}
 		},
+		createFormData(data) {
+			const form_data = new FormData()
+			if (this.file) form_data.append('file', this.file, this.file.name)
+			for (const prop in data) {
+				form_data.append(prop, data[prop])
+			}
+			return form_data
+		},
+		async getCategories() {
+			try {
+				const { data: { categories } } = await axios.get('/categories/get-all')
+				this.categories_data = categories
+				this.load_category = true
+			} catch (error) {
+				await handlerErrors(error)
+			}
+		},
 		reset() {
 			this.is_create = true
-			this.user = {}
-			this.name = null
-			this.last_name = null
-			this.email = null
-			this.password = null
-			this.$parent.user = {}
+			this.product = {}
+			this.category = null
+			this.$parent.product = {}
 			this.back_errors = {}
+			this.file = null
+			this.image_preview ='/storage/images/products/default.png'
+			document.getElementById('file').value = ''
 			setTimeout(() => this.$refs.form.resetForm(), 100);
 		}
+
 	}
 }
 </script>

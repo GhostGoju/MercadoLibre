@@ -9,11 +9,26 @@ use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
 {
+
+
+
+
+
+
 	public function index(Request $request)
 	{
+		$roles = Role::get();
 		$users = User::with('roles')->get();
-		if (!$request->ajax()) return view('users.index', compact('users'));
+		return view('users.index', compact('users', 'roles'));
 	}
+
+
+
+
+
+
+
+
 
 	public function create()
 	{

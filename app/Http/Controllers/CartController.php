@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-
+use App\Models\Product;
+use App\Models\User;
 
 class CartController extends Controller
 {

@@ -4,6 +4,6 @@
             <h1>Listado de Categorias</h1>
         </div>
 
-        <the-category-list :categories="{{ $categories }}"/>
+		<the-category-list :categories="{{ $categories }}"/>
     </section>
 </x-app>

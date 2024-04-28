@@ -37,8 +37,8 @@ export const handlerErrors = async error => {
 		default:
 			options = {
 				icon: 'error',
-				title: 'Erro de servido',
-				text: 'Algo salio mal, espera que se revisara este error.'
+				title: 'Error del servidor',
+				text: 'Algo salio mal :( '
 			}
 			break
 	}

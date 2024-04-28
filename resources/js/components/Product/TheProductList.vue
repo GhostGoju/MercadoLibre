@@ -52,7 +52,7 @@ export default {
 	components: {
 		ProductModal
 	},
-	props: ['products','categories_data'],
+	props: ['products','categories'],
 	data() {
 		return {
 			modal: null,
@@ -72,7 +72,7 @@ export default {
 			})
 		},
 		editProduct(product) {
-			this.product = product
+			this.product = product;
 			this.openModal()
 		},
 		async deleteProduct({ id }) {

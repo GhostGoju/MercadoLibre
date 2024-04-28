@@ -98,7 +98,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['product_data', 'categories_data'],
+	props: ['categories', 'product_data'],
 	components: { Field, Form },
 	watch: {
 		product_data(new_value) {

@@ -4,7 +4,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} categoria</h5>
+					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Categoria</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
@@ -32,8 +32,8 @@
 
 					<!-- Buttons -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Almacenar</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</Form>
 			</div>
@@ -48,10 +48,10 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['category_data'],
+
 	components: { Field, Form },
 	watch: {
-		product_data(new_value) {
+		category_data(new_value) {
 			this.category = { ...new_value }
 			if (!this.category.id) return
 			this.is_create = false
@@ -69,10 +69,7 @@ export default {
 			is_create: true,
 			category: {
 			},
-			category: null,
-			categories_data: [],
-			load_category: false,
-			back_errors: {},s
+			back_errors: {},
 		}
 	},
 	created() {
@@ -91,7 +88,6 @@ export default {
 				this.back_errors = await handlerErrors(error)
 			}
 		},
-
 		createFormData(data) {
 			const form_data = new FormData()
 			for (const prop in data) {
@@ -99,8 +95,6 @@ export default {
 			}
 			return form_data
 		},
-
-
 		reset() {
 			this.is_create = true
 			this.category = {}

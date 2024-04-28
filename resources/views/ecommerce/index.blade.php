@@ -1,9 +1,9 @@
-<x-app title="Carrito">
+<x-app title="Productos">
     <section class="container">
         <div class="d-flex justify-content-center my-4">
-            <h1>Carrito</h1>
+            <h1>Listado Productos</h1>
         </div>
 
-        <cart-list :products="{{ $products }}" :users="{{ $users }}" />
+        <ecommerce-details />
     </section>
 </x-app>

@@ -34,7 +34,7 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- <category-modal/> -->
+				<product-modal :categories="categories"  ref="category_modal" />
 			</div>
 		</div>
 	</section>
@@ -68,7 +68,7 @@ export default {
 			})
 		},
 		editCategory(category) {
-			this.category= category
+			this.category = category;
 			this.openModal()
 		},
 		async deleteCategory({ id }) {
@@ -86,3 +86,4 @@ export default {
 	}
 }
 </script>
+
