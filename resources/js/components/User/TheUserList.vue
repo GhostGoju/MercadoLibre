@@ -26,7 +26,8 @@
 								<td v-for="(role, roleIndex) in user.roles" :key="roleIndex">{{ role.name }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
-										<button type="button" class="btn btn-warning btn-sm" @click="editUser(user)">
+										<button type="button" class="btn btn-warning btn-sm"
+										@click="editUser(user)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"

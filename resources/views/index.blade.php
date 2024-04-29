@@ -4,6 +4,9 @@
 
     <section class="d-flex flex-wrap justify-content-center" id="productList">
         @foreach ($products->groupBy('category_id') as $categoryId => $groupedProducts)
+            <section class="d-flex gap-2 justify-content-center w-100 border-bottom">
+                <h2 a>{{ $groupedProducts->first()->category->name }}</h2>
+            </section>
             @php
                 $count = 0;
             @endphp
@@ -29,16 +32,16 @@
                 <div class="card-footer">
                     <div class="d-flex gap-2 justify-content-center">
 
-						{{-- ECOMMERCE --}}
+                        {{-- ECOMMERCE --}}
                         <a class="btn btn-outline-secondary" type="button"
                             href="{{ route('products.show', $product->id) }}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
 
-						{{-- CARRITO --}}
+                        {{-- CARRITO --}}
                         <a class="btn btn-outline-success" type="button"
                             href="{{ route('products.show', $product->id) }}">
-							<i class="fa-solid fa-cart-plus"></i>
+                            <i class="fa-solid fa-cart-plus"></i>
                         </a>
 
                     </div>

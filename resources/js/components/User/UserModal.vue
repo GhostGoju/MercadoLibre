@@ -4,7 +4,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} usuario</h5>
+					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Usuario</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
@@ -50,8 +50,8 @@
 							</div>
 							<!-- Role -->
 							<div class="col-12 mt-2" v-if="load_role">
-								<Field name="category" v-slot="{ errorMessage, field, valid }" v-model="role">
-									<label for="category">Categoria</label>
+								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
+									<label for="role">Rol</label>
 
 									<v-select id="role" :options="roles_data" v-model="role"
 										:reduce="role => role.id" v-bind="field" label="name"
@@ -66,8 +66,8 @@
 					</div>
 					<!-- Buttons -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Almacenar</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Carrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</Form>
 			</div>
@@ -82,14 +82,14 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['user'],
+	props: ['user_data'],
 	components: { Field, Form },
 	watch: {
 		user_data(new_value) {
 			this.user = { ...new_value }
 			if (!this.user.id) return
 			this.is_create = false
-			this.role = this.user.role_id
+			this.role = this.role_id
 		}
 	},
 	computed: {
@@ -120,7 +120,7 @@ export default {
 
 	methods: {
 		index() {
-			// this.getRoles()
+			this.getRoles()
 		},
 
 		async saveUser() {
@@ -145,7 +145,7 @@ export default {
 
 		async getRoles() {
 			try {
-				const { data: { roles } } = await axios.get('roles')
+				const { data: { roles } } = await axios.get('/roles/get-all')
 				this.roles_data = roles
 				this.load_role = true
 			} catch (error) {

@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 
 
 Auth::routes();
@@ -49,5 +50,12 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::group(['prefix' => 'carts', 'controller' => CartController::class], function () {
 		Route::get('/', 'index')->name('carts.index');
 		Route::post('/addToCart', 'addToCart')->name('carts.addToCart');
+	});
+
+
+	// Roles
+	Route::group(['prefix' => 'roles', 'controller' => RoleController::class], function () {
+		Route::get('/', 'index')->name('roles.index')->middleware('can:roles.index');
+		Route::get('/get-all', 'index')->name('roles.get-all')->middleware('can:roles.get-all');
 	});
 });

@@ -30,6 +30,7 @@ class RoleAndPermissionSeeder extends Seeder
 			'users.edit',
 			'users.update',
 			'users.destroy',
+			'roles.get-all',
 		];
 
 		// Roles

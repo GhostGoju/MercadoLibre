@@ -9,14 +9,13 @@ use App\Http\Requests\User\UserRequest;
 class UserController extends Controller
 {
 
-	public function index(Request $request)
+	public function index()
 	{
 		$users = User::with('roles')->get();
-		if (!$request->ajax()) return view('users.index', compact('users'));
-		return response()->json(['users' => $users], 200);
+		return view('users.index', compact('users'));
 	}
 
-
+	// dd($roles[1]->toArray());
 
 	public function store(Request $request)
 	{
@@ -37,9 +36,9 @@ class UserController extends Controller
 
 
 
-	public function destroy($request, User $user)
+	public function destroy(User $user)
 	{
 		$user->delete();
-		if (!$request->ajax()) return back();
+		$this->deleteFile($user);
 	}
 }
