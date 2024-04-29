@@ -48,7 +48,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-
+	props: ['category_data'],
 	components: { Field, Form },
 	watch: {
 		category_data(new_value) {
@@ -76,7 +76,11 @@ export default {
 		this.index()
 	},
 
+
 	methods: {
+		index() {
+
+    },
 
 		async saveCategory() {
 			try {

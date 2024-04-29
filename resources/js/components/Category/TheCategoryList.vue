@@ -34,7 +34,7 @@
 						</tbody>
 					</table>
 				</div>
-				<product-modal :categories="categories"  ref="category_modal" />
+				<category-modal :category_data="category"  ref="category_modal" />
 			</div>
 		</div>
 	</section>

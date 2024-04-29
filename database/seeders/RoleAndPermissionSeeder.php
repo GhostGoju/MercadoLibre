@@ -11,7 +11,7 @@ class RoleAndPermissionSeeder extends Seeder
 {
 	public function run()
 	{
-		$permissionsAdmin = [ 				//?ADMINISTRADOR
+		$permissionsAdmin = [
 			'products.index',
 			'products.create',
 			'products.store',

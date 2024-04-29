@@ -1,5 +1,3 @@
 <template>
-	<h1>
-		ecommerce
-	</h1>
+	<h3>hola</h3>
 </template>

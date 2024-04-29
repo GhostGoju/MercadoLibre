@@ -11,8 +11,8 @@
 							<tr>
 								<th>ID</th>
 								<th>Nombre</th>
-								<th>Stock</th>
 								<th>Categoria</th>
+								<th>Stock</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
@@ -20,8 +20,8 @@
 							<tr v-for="(product, index) in products" :key="index">
 								<td>{{ product.id }}</td>
 								<td>{{ product.name }}</td>
-								<td>{{ product.stock }}</td>
 								<td>{{ product.category.name }}</td>
+								<td>{{ product.stock }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
 										<button type="button" class="btn btn-warning btn-sm"
@@ -38,7 +38,7 @@
 						</tbody>
 					</table>
 				</div>
-				<product-modal :categories_data="categories_data" :product_data="product" ref="product_modal" />
+				<product-modal :product_data="product" ref="product_modal" />
 			</div>
 		</div>
 	</section>
@@ -52,7 +52,7 @@ export default {
 	components: {
 		ProductModal
 	},
-	props: ['products','categories'],
+	props: ['products'],
 	data() {
 		return {
 			modal: null,

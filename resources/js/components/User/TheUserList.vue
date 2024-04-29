@@ -22,11 +22,12 @@
 								<td>{{ user.id }}</td>
 								<td>{{ user.name }}</td>
 								<td>{{ user.last_name }}</td>
-								<td>{{ user.email }}</td> <!-- Agrega el campo email -->
-								<td>{{ user.roles[0].name }}</td> <!-- Accede al nombre del rol -->
+								<td>{{ user.email }}</td>
+								<td>{{ user.role.name }}</td>
+								<!-- <td>{{ user.roles[0].name }}</td>  -->
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
-										<button type="button" class="btn btn-warning btn-sm" @click="edituser(user)">
+										<button type="button" class="btn btn-warning btn-sm" @click="editUser(user)">
 											<i class="fas fa-pencil-alt"></i>
 										</button>
 										<button type="button" class="btn btn-danger btn-sm ms-2" title="Eliminar"
@@ -39,7 +40,7 @@
 						</tbody>
 					</table>
 				</div>
-				<product-modal :user="users" ref="user_modal" />
+				<user-modal :users="users" ref="user_modal" />
 			</div>
 		</div>
 	</section>
@@ -49,6 +50,9 @@
 import UserModal from './UserModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
+
+
+
 export default {
 	components: {
 		UserModal
@@ -57,7 +61,7 @@ export default {
 	data() {
 		return {
 			modal: null,
-			product: {}
+			users: {}
 		}
 	},
 	mounted() {

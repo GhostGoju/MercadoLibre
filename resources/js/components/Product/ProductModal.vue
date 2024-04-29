@@ -82,8 +82,8 @@
 
 					<!-- Buttons -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Almacenar</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Carrar</button>
+						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</Form>
 			</div>
@@ -98,7 +98,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['categories', 'product_data'],
+	props: ['product_data'],
 	components: { Field, Form },
 	watch: {
 		product_data(new_value) {

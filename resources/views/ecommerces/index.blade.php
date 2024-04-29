@@ -1,7 +1,7 @@
-<x-app title="Productos">
+<x-app title="Detalles">
     <section class="container">
         <div class="d-flex justify-content-center my-4">
-            <h1>Listado Productos</h1>
+            <h1>Ecommerce</h1>
         </div>
 
         <ecommerce-details />

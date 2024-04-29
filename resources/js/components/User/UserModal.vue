@@ -18,8 +18,8 @@
 							<!-- Nombre -->
 							<div class="col-12 mt-2">
 								<label for="name">Nombre</label>
-								<Field name="name" v-slot="{ errorMessage, field }" v-model="product.name">
-									<input type="text" id="name" v-model="product.name"
+								<Field name="name" v-slot="{ errorMessage, field }" v-model="user.name">
+									<input type="text" id="name" v-model="user.name"
 										:class="`form-control ${errorMessage || back_errors['name'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
@@ -28,7 +28,7 @@
 							</div>
 							<!-- apellido -->
 							<div class="col-12 mt-2">
-								<label for="last_name">Nombre</label>
+								<label for="last_name">Apellido</label>
 								<Field name="last_name" v-slot="{ errorMessage, field }" v-model="user.last_name">
 									<input type="text" id="last_name" v-model="user.last_name"
 										:class="`form-control ${errorMessage || back_errors['last_name'] ? 'is-invalid' : ''}`"
@@ -56,7 +56,7 @@
 								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
 									<label for="role">Rol</label>
 
-									<v-select id="category" :options="categories_data" v-model="role"
+									<v-select id="role" :options="roles_data" v-model="role"
 										:reduce="role => role.id" v-bind="field" label="role"
 										placeholder="Selecciona Rol" :clearable="false"
 										:class="`${errorMessage ? 'is-invalid' : ''}`">
@@ -85,7 +85,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['role_data', 'user_data'],
+	props: ['users'],
 	components: { Field, Form },
 	watch: {
 		user_data(new_value) {
@@ -111,9 +111,9 @@ export default {
 			is_create: true,
 			user: {
 			},
-			category: null,
-			categories_data: [],
-			load_category: false,
+			role: null,
+			roles_data: [],
+			load_role: false,
 			back_errors: {},
 		}
 	},
@@ -123,18 +123,15 @@ export default {
 
 	methods: {
 		index() {
-			this.getRoles()
+			// this.getRoles()
 		},
-		previewImage(envent) {
-			this.file = envent.target.files[0]
-			this.image_preview = URL.createObjectURL(this.file)
-		},
-		async saveProduct() {
+
+		async saveUser() {
 			try {
-				this.product.category_id = this.category
-				const product = this.createFormData(this.product)
-				if (this.is_create) await axios.post('/products/store', product)
-				else await axios.post(`/products/update/${this.product.id}`, product)
+				this.user.role_id = this.role
+				const user = this.createFormData(this.user)
+				if (this.is_create) await axios.post('/users/store', user)
+				else await axios.post(`/users/update/${this.user.id}`, user)
 				await successMessage({ reload: true })
 			} catch (error) {
 				this.back_errors = await handlerErrors(error)
@@ -142,30 +139,30 @@ export default {
 		},
 		createFormData(data) {
 			const form_data = new FormData()
-			if (this.file) form_data.append('file', this.file, this.file.name)
 			for (const prop in data) {
 				form_data.append(prop, data[prop])
 			}
 			return form_data
 		},
-		async getCategories() {
-			try {
-				const { data: { categories } } = await axios.get('/categories/get-all')
-				this.categories_data = categories
-				this.load_category = true
-			} catch (error) {
-				await handlerErrors(error)
-			}
+
+
+		async getRoles() {
+			// try {
+			// 	const { data: { roles } } = await axios.get('roles')
+			// 	this.roles_data = roles
+			// 	this.load_role = true
+			// } catch (error) {
+			// 	await handlerErrors(error)
+			// }
 		},
+
+
 		reset() {
 			this.is_create = true
-			this.product = {}
-			this.category = null
-			this.$parent.product = {}
+			this.user = {}
+			this.role = null
+			this.$parent.user = {}
 			this.back_errors = {}
-			this.file = null
-			this.image_preview ='/storage/images/products/default.png'
-			document.getElementById('file').value = ''
 			setTimeout(() => this.$refs.form.resetForm(), 100);
 		}
 

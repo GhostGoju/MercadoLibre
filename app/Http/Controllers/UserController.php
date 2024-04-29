@@ -10,59 +10,36 @@ use App\Http\Requests\User\UserRequest;
 class UserController extends Controller
 {
 
-
-
-
-
-
 	public function index(Request $request)
 	{
-		$roles = Role::get();
 		$users = User::with('roles')->get();
-		return view('users.index', compact('users', 'roles'));
+		return view('users.index', compact('users'));
 	}
 
 
 
-
-
-
-
-
-
-	public function create()
-	{
-		$roles = Role::all()->pluck('name');
-		return view('users.create', compact('roles'));
-	}
-
-
-	public function store(UserRequest $request)
+	public function store(Request $request)
 	{
 		$user = new User($request->all());
 		$user->save();
 		$user->assignRole($request->role);
-		if (!$request->ajax()) return back()->with('success', 'User created');
+		if (!$request->ajax()) return back();
 	}
 
-
-	public function edit(User $user)
-	{
-		$roles = Role::all()->pluck('name');
-		return view('users.edit', compact('user', 'roles'));
-	}
 
 
 	public function update(UserRequest $request, User $user)
 	{
 		$user->update($request->all());
 		$user->syncRoles([$request->role]);
-		if (!$request->ajax()) return back()->with('success', 'User updated');
+		if (!$request->ajax()) return back();
 	}
 
-	public function destroy(Request $request, User $user)
+
+
+	public function destroy($request, User $user)
 	{
 		$user->delete();
-		if (!$request->ajax()) return back()->with('success', 'User deleted');
+		if (!$request->ajax()) return back();
 	}
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\Category;
 use App\Http\Traits\UploadFile;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Product\ProductRequest;
@@ -23,11 +22,11 @@ class ProductController extends Controller
 		return view('index', compact('products'));
 	}
 
+
 	public function index()
 	{
-		$categories = Category::get();
 		$products = Product::with('category', 'file')->whereHas('category')->get();
-		return view('products.index', compact('products', 'categories'));
+		return view('products.index', compact('products'));
 	}
 
 	public function store(ProductRequest $request)

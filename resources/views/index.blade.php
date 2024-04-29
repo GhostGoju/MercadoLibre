@@ -25,10 +25,10 @@
                         <div class="card-footer">
                             <div class="d-flex gap-2 justify-content-center">
 
-								{{-- Ecommerce--}}
-								{{-- <a class="btn btn-outline-dark" type="button" href="{{ route('ecommerce.index') }}">
+									{{-- ECOMMERCE --}}
+								<a class="btn btn-outline-dark" type="button" href="{{ route('ecommerces.index') }}">
 									<i class="fa-solid fa-eye"></i>
-                                </a> --}}
+                                </a>
 									{{-- ENVIAR AL CARRITO --}}
 								<a class="btn btn-outline-success" type="button" href="{{ route('products.index') }}">
 									<i class="fa-solid fa-cart-plus"></i>

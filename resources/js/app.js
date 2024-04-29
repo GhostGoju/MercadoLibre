@@ -13,6 +13,7 @@ const app = createApp({
 		TheProductList,
 		TheUserList,
 		TheCategoryList,
+
 	}
 })
 
