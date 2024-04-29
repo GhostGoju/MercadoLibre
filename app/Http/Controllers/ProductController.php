@@ -60,10 +60,9 @@ class ProductController extends Controller
 
 	public function show($id)
 	{
-		$product = Product::find($id);
-		return view('ecommerces.index', compact('products'));
+		$product = Product::with('file')->find($id);
+		return view('ecommerces.index', compact('product'));
 	}
-
 
 
 	public function destroy(Product $product)

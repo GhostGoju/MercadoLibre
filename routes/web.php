@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\EcommerceController;
+
 
 Auth::routes();
 Route::get('/', [ProductController::class, 'home'])->name('products.home');
@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth']], function () {
 	// Product
 	Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
 		Route::get('/', 'index')->name('products.index')->middleware('can:products.index');
-		Route::get('/show/{product}', 'show')->name('products.show')->middleware('can:products.show');
+		Route::get('/show/{product}', 'show')->name('products.show');
 		Route::post('/store', 'store')->name('products.store')->middleware('can:products.store');
 		Route::post('/update/{product}', 'update')->name('products.update')->middleware('can:products.update');
 		Route::delete('/{product}', 'destroy')->name('products.destroy')->middleware('can:products.destroy');

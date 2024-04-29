@@ -23,23 +23,23 @@
                             <strong>Categoria: </strong> {{ $product->category->name }}
                         </span>
                         <span class=".col-md">
-                            <strong>Unidades Disponibles: </strong> {{ $product->stock }}
+                            <strong>Und. Disponibles: </strong> {{ $product->stock }}
                         </span>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="d-flex gap-2 justify-content-center">
-                        {{-- ECOMMERCE --}}
-                        {{-- Enlace a la vista del producto individual --}}
+
+						{{-- ECOMMERCE --}}
                         <a class="btn btn-outline-dark" type="button"
                             href="{{ route('products.show', $product->id) }}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-
                         {{-- ENVIAR AL CARRITO --}}
                         <a class="btn btn-outline-success" type="button" href="{{ route('products.index') }}">
                             <i class="fa-solid fa-cart-plus"></i>
                         </a>
+
                     </div>
                 </div>
             </div>

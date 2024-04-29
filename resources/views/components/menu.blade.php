@@ -18,8 +18,18 @@
                 </form>
             </ul>
 
+
+
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
+
+                {{-- CARRITO --}}
+                <li>
+                    <a class="nav-link" href="{{ route('products.index') }}">
+                        <i class="fa-solid fa-cart-plus"></i>
+                    </a>
+                </li>
+
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
