@@ -1,6 +1,5 @@
 <x-app title="Inicio">
     <section class="my-3 d-flex justify-content-center">
-        <h1>HOME</h1>
     </section>
 
     <section class="d-flex flex-wrap justify-content-center" id="productList">
@@ -31,7 +30,7 @@
                     <div class="d-flex gap-2 justify-content-center">
 
 						{{-- ECOMMERCE --}}
-                        <a class="btn btn-outline-dark" type="button"
+                        <a class="btn btn-outline-secondary" type="button"
                             href="{{ route('products.show', $product->id) }}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
