@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
@@ -12,7 +11,7 @@ class UserController extends Controller
 
 	public function index(Request $request)
 	{
-		$users = User::with('roles')->get();
+		$users = User::get();
 		return view('users.index', compact('users'));
 	}
 

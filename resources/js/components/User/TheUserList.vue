@@ -23,8 +23,7 @@
 								<td>{{ user.name }}</td>
 								<td>{{ user.last_name }}</td>
 								<td>{{ user.email }}</td>
-								<td>{{ user.role.name }}</td>
-								<!-- <td>{{ user.roles[0].name }}</td>  -->
+								<td>{{ user.role }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
 										<button type="button" class="btn btn-warning btn-sm" @click="editUser(user)">
@@ -40,7 +39,7 @@
 						</tbody>
 					</table>
 				</div>
-				<user-modal :users="users" ref="user_modal" />
+				<user-modal :user_data="user" ref="user_modal" />
 			</div>
 		</div>
 	</section>
@@ -52,7 +51,6 @@ import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
 
 
-
 export default {
 	components: {
 		UserModal
@@ -61,7 +59,7 @@ export default {
 	data() {
 		return {
 			modal: null,
-			users: {}
+			user: {}
 		}
 	},
 	mounted() {

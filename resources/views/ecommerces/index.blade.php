@@ -4,6 +4,6 @@
             <h1>Ecommerce</h1>
         </div>
 
-        <ecommerce-details />
+        <ecommerce-details :products="{{ $products }}"/>
     </section>
 </x-app>

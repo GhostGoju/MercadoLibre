@@ -4,6 +4,6 @@
             <h1>Listado Usuarios</h1>
         </div>
 
-        <the-user-list :users="{{ $users }}"/>
+        <the-user-list :users="{{ $users }}" />
     </section>
 </x-app>

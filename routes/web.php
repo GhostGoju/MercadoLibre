@@ -42,9 +42,4 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/update/{category}', 'update')->name('categories.update')->middleware('can:categories.update');
 		Route::delete('/{category}', 'destroy')->name('categories.destroy')->middleware('can:categories.destroy');
 	});
-
-	// Category
-	Route::group(['prefix' => 'ecommerces', 'controller' => EcommerceController::class], function () {
-		Route::get('/', 'index')->name('ecommerces.index')->middleware('can:ecommerces.index');
-	});
 });

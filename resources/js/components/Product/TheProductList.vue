@@ -48,6 +48,8 @@
 import ProductModal from './ProductModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
+
+
 export default {
 	components: {
 		ProductModal

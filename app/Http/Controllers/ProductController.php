@@ -56,6 +56,16 @@ class ProductController extends Controller
 		}
 	}
 
+
+
+	public function show($id)
+	{
+		$product = Product::find($id);
+		return view('ecommerces.index', compact('products'));
+	}
+
+
+
 	public function destroy(Product $product)
 	{
 		$product->delete();

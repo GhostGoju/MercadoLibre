@@ -48,25 +48,22 @@
 									<span class="invalid-feedback">{{ back_errors['email'] }}</span>
 								</Field>
 							</div>
-
-
-
 							<!-- Role -->
 							<div class="col-12 mt-2" v-if="load_role">
-								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
-									<label for="role">Rol</label>
+								<Field name="category" v-slot="{ errorMessage, field, valid }" v-model="role">
+									<label for="category">Categoria</label>
 
 									<v-select id="role" :options="roles_data" v-model="role"
-										:reduce="role => role.id" v-bind="field" label="role"
+										:reduce="role => role.id" v-bind="field" label="name"
 										placeholder="Selecciona Rol" :clearable="false"
 										:class="`${errorMessage ? 'is-invalid' : ''}`">
 									</v-select>
 									<span class="invalid-feedback" v-if="!valid">{{ errorMessage }}</span>
 								</Field>
 							</div>
+
 						</section>
 					</div>
-
 					<!-- Buttons -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -85,7 +82,7 @@ import * as yup from 'yup';
 import { successMessage, handlerErrors } from '@/helpers/Alerts.js'
 
 export default {
-	props: ['users'],
+	props: ['user'],
 	components: { Field, Form },
 	watch: {
 		user_data(new_value) {
