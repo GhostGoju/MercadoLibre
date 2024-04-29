@@ -144,13 +144,13 @@ export default {
 
 
 		async getRoles() {
-			// try {
-			// 	const { data: { roles } } = await axios.get('roles')
-			// 	this.roles_data = roles
-			// 	this.load_role = true
-			// } catch (error) {
-			// 	await handlerErrors(error)
-			// }
+			try {
+				const { data: { roles } } = await axios.get('roles')
+				this.roles_data = roles
+				this.load_role = true
+			} catch (error) {
+				await handlerErrors(error)
+			}
 		},
 
 

@@ -34,9 +34,11 @@
                             href="{{ route('products.show', $product->id) }}">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        {{-- ENVIAR AL CARRITO --}}
-                        <a class="btn btn-outline-success" type="button" href="{{ route('products.index') }}">
-                            <i class="fa-solid fa-cart-plus"></i>
+
+						{{-- CARRITO --}}
+                        <a class="btn btn-outline-success" type="button"
+                            href="{{ route('products.show', $product->id) }}">
+							<i class="fa-solid fa-cart-plus"></i>
                         </a>
 
                     </div>

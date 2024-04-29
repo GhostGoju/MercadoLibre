@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -41,5 +42,12 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/store', 'store')->name('categories.store')->middleware('can:categories.store');
 		Route::post('/update/{category}', 'update')->name('categories.update')->middleware('can:categories.update');
 		Route::delete('/{category}', 'destroy')->name('categories.destroy')->middleware('can:categories.destroy');
+	});
+
+
+	//Carrito
+	Route::group(['prefix' => 'carts', 'controller' => CartController::class], function () {
+		Route::get('/', 'index')->name('carts.index');
+		Route::post('/addToCart', 'addToCart')->name('carts.addToCart');
 	});
 });

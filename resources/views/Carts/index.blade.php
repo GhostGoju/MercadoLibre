@@ -1,9 +1,9 @@
-<x-app title="Usuarios">
+<x-app title="Productos">
     <section class="container">
         <div class="d-flex justify-content-center my-4">
-            <h1>Listado Usuarios</h1>
+            <h1>Carrito</h1>
         </div>
 
-        <the-user-list :users="{{ $users }}"/>
+        <carrito/>
     </section>
 </x-app>

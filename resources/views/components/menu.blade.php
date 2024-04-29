@@ -25,7 +25,7 @@
 
                 {{-- CARRITO --}}
                 <li>
-                    <a class="nav-link" href="{{ route('products.index') }}">
+                    <a class="nav-link" href="{{ route('carts.index') }}">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
                 </li>

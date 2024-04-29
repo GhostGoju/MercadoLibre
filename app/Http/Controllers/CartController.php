@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
 
-	public function addToCart(Request $request)
+	public function addToCart(Product $product)
 	{
-		$productId = $request->input('product_id');
-		$userId = auth()->id();
+	}
 
-		Cart::create([
-			'user_id' => $userId,
-			'product_id' => $productId,
-			'quantity' => 1,
-		]);
-		// return
+
+	public function index()
+	{
+		Cart::get();
+		return view('carts.index');
 	}
 }

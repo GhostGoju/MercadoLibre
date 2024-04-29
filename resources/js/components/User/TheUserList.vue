@@ -23,7 +23,7 @@
 								<td>{{ user.name }}</td>
 								<td>{{ user.last_name }}</td>
 								<td>{{ user.email }}</td>
-								<td>{{ user.role }}</td>
+								<td v-for="(role, roleIndex) in user.roles" :key="roleIndex">{{ role.name }}</td>
 								<td>
 									<div class="d-flex justify-content-center" title="Editar">
 										<button type="button" class="btn btn-warning btn-sm" @click="editUser(user)">
@@ -39,7 +39,7 @@
 						</tbody>
 					</table>
 				</div>
-				<user-modal :user_data="user" ref="user_modal" />
+				<user-modal :user_data="user" vref="user_modal" />
 			</div>
 		</div>
 	</section>

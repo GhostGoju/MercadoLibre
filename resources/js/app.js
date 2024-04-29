@@ -8,6 +8,7 @@ import TheUserList from './components/User/TheUserList.vue'
 import TheCategoryList from './components/Category/TheCategoryList.vue'
 import BackendError from './components/Components/BackendError.vue'
 import EcommerceDetails from './components/Ecommerce/EcommerceDetails.vue'
+import Carrito from './components/Cart/Carrito.vue'
 
 const app = createApp({
 	components: {
@@ -15,6 +16,7 @@ const app = createApp({
 		TheUserList,
 		TheCategoryList,
 		EcommerceDetails,
+		Carrito,
 	}
 })
 
