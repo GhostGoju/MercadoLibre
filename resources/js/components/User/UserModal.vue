@@ -66,7 +66,7 @@
 					</div>
 					<!-- Buttons -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Carrar</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</Form>
@@ -111,7 +111,7 @@ export default {
 			role: null,
 			roles_data: [],
 			load_role: false,
-			back_errors: {},
+			back_errors: {}
 		}
 	},
 	created() {

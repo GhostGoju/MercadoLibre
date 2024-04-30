@@ -29,7 +29,7 @@
 									</tr>
 									<tr>
 										<th>Categoría</th>
-										<td>{{ product.category}}</td>
+										<td>{{ product.category.name}}</td>
 									</tr>
 									<tr>
 										<th>Descripción</th>

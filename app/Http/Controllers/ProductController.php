@@ -60,7 +60,7 @@ class ProductController extends Controller
 
 	public function show($id)
 	{
-		$product = Product::with('file')->find($id);
+		$product = Product::with('category', 'file')->find($id);
 		return view('ecommerces.index', compact('product'));
 	}
 

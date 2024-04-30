@@ -38,7 +38,7 @@
                             {{-- ECOMMERCE --}}
                             <a class="btn btn-outline-secondary" type="button"
                                 href="{{ route('products.show', $product->id) }}">
-                                <i class="fa-solid fa-eye"></i>
+                                <i class="fa-solid fa-eye"></i> Ver
                             </a>
 
                             {{-- CARRITO --}}

@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
 
-
-
 	public function addToCart(Request $request)
 	{
 
@@ -45,21 +43,11 @@ class CartController extends Controller
 
 
 
-
-
-
-
-
-
 	public function index()
 	{
 		$cartItems = Cart::where('user_id', Auth::id())->get();
 		return view('carts.index', ['cartItems' => $cartItems]);
 	}
-
-
-
-
 
 
 
@@ -69,17 +57,23 @@ class CartController extends Controller
 		return redirect()->route('cart.index')->with('success', 'Producto eliminado del carrito correctamente.');
 	}
 
+
+
 	public function updateQuantity(Request $request, Cart $cart)
 	{
 		$cart->update(['quantity' => $request->quantity]);
 		return redirect()->route('cart.index')->with('success', 'Cantidad actualizada correctamente.');
 	}
 
+
+
 	public function clearCart()
 	{
 		Cart::where('user_id', Auth::id())->delete();
 		return redirect()->route('cart.index')->with('success', 'Carrito vaciado correctamente.');
 	}
+
+
 
 	public function getTotal()
 	{
