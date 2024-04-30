@@ -31,6 +31,7 @@ class RoleAndPermissionSeeder extends Seeder
 			'users.update',
 			'users.destroy',
 			'roles.get-all',
+			'roles.index',
 		];
 
 		// Roles

@@ -74,6 +74,12 @@
                                     Categorias
                                 </a>
                             @endrole
+                            @role('Admin')
+                                {{-- Category --}}
+                                <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                    Roles
+                                </a>
+                            @endrole
 
 
                             {{-- Logout --}}
@@ -102,7 +108,7 @@
         searchInput.addEventListener('input', function() {
             const searchTerm = searchInput.value.trim().toLowerCase();
 
-            Array.from(productList.children).forEach(function(product) {
+            Array.from(productList.querySelectorAll('.card')).forEach(function(product) {
                 const productName = product.querySelector('.card-title').textContent
                     .toLowerCase();
                 if (productName.includes(searchTerm)) {

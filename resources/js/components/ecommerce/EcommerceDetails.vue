@@ -18,9 +18,10 @@
 						<div class="col-md-6">
 							<table class="table" id="product_details">
 								<tbody>
+
 									<tr>
-										<th>Descripción</th>
-										<td>{{ product.description }}</td>
+										<th>Precio:</th>
+										<td>{{ product.price }}</td>
 									</tr>
 									<tr>
 										<th>Stock</th>
@@ -28,8 +29,13 @@
 									</tr>
 									<tr>
 										<th>Categoría</th>
-										<td>{{ product.category }}</td>
+										<td>{{ product.category}}</td>
 									</tr>
+									<tr>
+										<th>Descripción</th>
+										<td>{{ product.description }}</td>
+									</tr>
+
 								</tbody>
 							</table>
 						</div>

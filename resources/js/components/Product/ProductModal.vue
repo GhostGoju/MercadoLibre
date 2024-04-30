@@ -42,10 +42,20 @@
 								</Field>
 							</div>
 
+							<!-- Price -->
+							<div class="col-12 mt-2">
+								<Field name="price" v-slot="{ errorMessage, field }" v-model="product.price">
+									<label for="price">Precio</label>
+									<input type="number" id="price" v-model="product.price"
+										:class="`form-control ${errorMessage ? 'is-invalid' : ''}`" v-bind="field">
+									<span class="invalid-feedback">{{ errorMessage }}</span>
+								</Field>
+							</div>
+
 							<!-- Stock -->
 							<div class="col-12 mt-2">
 								<Field name="stock" v-slot="{ errorMessage, field }" v-model="product.stock">
-									<label for="stock">Cantidad</label>
+									<label for="stock">Unidades</label>
 									<input type="number" id="stock" v-model="product.stock"
 										:class="`form-control ${errorMessage ? 'is-invalid' : ''}`" v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
@@ -82,7 +92,7 @@
 
 					<!-- Buttons -->
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Carrar</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
 						<button type="submit" class="btn btn-primary">Guardar</button>
 					</div>
 				</Form>
@@ -114,6 +124,7 @@ export default {
 			return yup.object({
 				name: yup.string().required(),
 				stock: yup.number().required().positive().integer(),
+				price: yup.number().required().positive().integer(),
 				category: yup.string().required(),
 				description: yup.string().required(),
 			});

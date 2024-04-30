@@ -44,6 +44,7 @@ class CategoryController extends Controller
 
 	public function show(Category $category)
 	{
+		$categories = Category::query();
 		return response()->json(['category' => $category], 200);
 	}
 

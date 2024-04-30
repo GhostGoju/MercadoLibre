@@ -1,1 +1,57 @@
-// dd($users[0]->toArray());
+// Imprimir datos en el control
+
+dd($users[0]->toArray());
+
+
+
+// Imprimir en el localStorge
+
+console.log(localStorage);
+
+
+
+// Limpiar el localStorage
+
+localStorage.clear();
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Script Carrito
+
+{{-- Script para manejar el evento de clic en los botones de "Agregar al carrito" --}}
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+		addToCartButtons.forEach(button => {
+			button.addEventListener('click', function (event) {
+				const productId = event.target.dataset.productId;
+
+				// Realizar una solicitud HTTP POST al backend de Laravel
+				axios.post('/carts/addToCart', { product_id: productId, quantity: 1 })
+					.then(response => {
+						// Manejar la respuesta del backend (opcional)
+						console.log(response.data);
+						// Mostrar un mensaje de éxito al usuario (opcional)
+						alert('Producto añadido al carrito correctamente');
+					})
+					.catch(error => {
+						// Manejar cualquier error que ocurra durante la solicitud (opcional)
+						console.error(error);
+						// Mostrar un mensaje de error al usuario (opcional)
+						alert('Ocurrió un error al agregar el producto al carrito');
+					});
+			});
+		});
+	});
+</script>

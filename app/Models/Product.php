@@ -17,6 +17,7 @@ class Product extends Model
 		'category_id',
 		'name',
 		'stock',
+		'price',
 		'description',
 	];
 
@@ -24,13 +25,12 @@ class Product extends Model
 
 	public function formatDescription(): Attribute
 	{
-		return Attribute::make( 								//?ACCESOR
+		return Attribute::make(
 			get: function ($value, $attributes) {
 				return Str::limit($attributes['description'], 80,  '...');
 			},
 		);
 	}
-
 
 
 	public function category()
