@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 			CategorySeeder::class
 		]);
 
-		User::factory(10)->create();
-		Product::factory(100)->create();
+		User::factory(3)->create();
+		Product::factory(180)->create();
 	}
 }

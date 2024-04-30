@@ -9,12 +9,41 @@ use App\Http\Requests\Category\CategoryRequest;
 class CategoryController extends Controller
 {
 
+
+
+
+
 	public function index(Request $request)
 	{
 		$categories = Category::get();
 		if (!$request->ajax()) return view('categories.index', compact('categories'));
 		return response()->json(['categories' => $categories], 200);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
+
+
 	public function addToCart(Request $request)
 	{
 
@@ -34,19 +37,31 @@ class CartController extends Controller
 				]);
 			}
 
-			return redirect()->route('carts.index')->with('success', 'Producto añadido al carrito correctamente.');
+			return redirect()->route('carts.index');
 		} else {
-			return redirect()->route('login')->with('error', 'Debes iniciar sesión para añadir productos al carrito.');
+			return redirect()->route('login');
 		}
 	}
 
 
+
+
+
+
+
+
+
 	public function index()
 	{
-		// Obtener el carrito del usuario actual
 		$cartItems = Cart::where('user_id', Auth::id())->get();
-		return view('carts.index', compact('cartItems'));
+		return view('carts.index', ['cartItems' => $cartItems]);
 	}
+
+
+
+
+
+
 
 	public function removeFromCart(Cart $cart)
 	{
