@@ -38,7 +38,7 @@
                             {{-- ECOMMERCE --}}
                             <a class="btn btn-outline-secondary" type="button"
                                 href="{{ route('products.show', $product->id) }}">
-                                <i class="fa-solid fa-eye"></i> Ver
+                                <i class="fa-solid fa-eye"></i>
                             </a>
 
                             {{-- CARRITO --}}
@@ -47,7 +47,7 @@
 								<input type="hidden" name="product_id" value="{{ $product->id }}">
 								<input type="hidden" name="quantity" value="1">
 								<button type="submit" class="btn btn-outline-success add-to-cart-btn">
-									<i class="fa-solid fa-cart-plus"></i> Agregar al carrito
+									<i class="fa-solid fa-cart-plus"></i> Carrito
 								</button>
 							</form>
 
