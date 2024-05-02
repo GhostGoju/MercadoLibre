@@ -57,5 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::group(['prefix' => 'roles', 'controller' => RoleController::class], function () {
 		Route::get('/', 'index')->name('roles.index')->middleware('can:roles.index');
 		Route::get('/get-all', 'index')->name('roles.get-all')->middleware('can:roles.get-all');
+		Route::post('/store', 'store')->name('roles.store')->middleware('can:roles.store');
+		Route::post('/update/{role}', 'update')->name('roles.update')->middleware('can:roles.update');
+		Route::delete('/{role}', 'destroy')->name('roles.destroy')->middleware('can:roles.destroy');
 	});
 });

@@ -34,7 +34,7 @@
 						</tbody>
 					</table>
 				</div>
-				<!-- <product-modal :role_data="role" ref="role_modal" /> -->
+				<role-modal :role_data="role" ref="role_modal" />
 			</div>
 		</div>
 	</section>

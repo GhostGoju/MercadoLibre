@@ -74,12 +74,12 @@
                                     Categorias
                                 </a>
                             @endrole
-                            {{-- @role('Admin') --}}
+                            @role('Admin')
                                 {{-- Role --}}
-                                {{-- <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                <a class="dropdown-item" href="{{ route('roles.index') }}">
                                     Roles
-                                </a> --}}
-                            {{-- @endrole --}}
+                                </a>
+                            @endrole
 
 
                             {{-- Logout --}}

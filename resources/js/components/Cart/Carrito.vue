@@ -10,7 +10,7 @@
 			</thead>
 			<tbody>
 				<tr v-for="(cartItem, index) in cartItems" :key="index">
-					<td>{{ cartItem.product_id.name }}</td>
+					<td>{{ cartItem.product.name }}</td>
 					<td>{{ cartItem.quantity }}</td>
 				</tr>
 			</tbody>

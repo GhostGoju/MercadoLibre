@@ -21,7 +21,6 @@ class CategoryController extends Controller
 	{
 		$category = new Category($request->all());
 		$category->save();
-		return response()->json([], 200);
 	}
 
 
@@ -36,7 +35,6 @@ class CategoryController extends Controller
 	public function getAll()
 	{
 		$categories = Category::query();
-		return response()->json(['categories' => $categories], 200);
 	}
 
 
@@ -44,7 +42,6 @@ class CategoryController extends Controller
 	public function show(Category $category)
 	{
 		$categories = Category::query();
-		return response()->json(['category' => $category], 200);
 	}
 
 

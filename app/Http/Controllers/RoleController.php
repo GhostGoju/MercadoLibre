@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
 
+
 	public function index(Request $request)
 	{
 		$roles = Role::get();
@@ -17,10 +18,37 @@ class RoleController extends Controller
 	}
 
 
+	public function store(Request $request)
+	{
+		$role = new Role($request->all());
+		$role->save();
+	}
+
+
+
+	public function update($request, Role $role)
+	{
+		$role->update($request->all());
+	}
+
+
+
 	public function getAll()
 	{
 		$roles = Role::query();
-		// dd($roles[1]->toArray());
-		return response()->json(['roles' => $roles], 200);
+	}
+
+
+
+	public function show(Role $role)
+	{
+		$roles = Role::query();
+	}
+
+
+
+	public function destroy(Role $role)
+	{
+		$role->delete();
 	}
 }

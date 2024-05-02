@@ -22,7 +22,7 @@ class UserController extends Controller
 		$user = new User($request->all());
 		$user->save();
 		$user->assignRole($request->role);
-		if (!$request->ajax()) return back();
+		return back();
 	}
 
 
@@ -30,8 +30,8 @@ class UserController extends Controller
 	public function update(UserRequest $request, User $user)
 	{
 		$user->update($request->all());
-		$user->syncRoles([$request->role]);
-		if (!$request->ajax()) return back();
+		$user->assignRole([$request->role]);
+		return back();
 	}
 
 

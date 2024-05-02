@@ -4,7 +4,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Role</h5>
+					<h5 class="modal-title">{{ is_create ? 'Crear' : 'Editar' }} Rol</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 
@@ -78,7 +78,6 @@ export default {
 
 	methods: {
 		index() {
-			this.getCategories()
 		},
 
 		async saveRole() {
@@ -104,7 +103,6 @@ export default {
 			this.role = {}
 			this.$parent.role = {}
 			this.back_errors = {}
-			setTimeout(() => this.$refs.form.resetForm(), 100);
 		}
 
 	}

@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Traits\UploadFile;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
+
+	use UploadFile;
+
 
 	public function addToCart(Request $request)
 	{
@@ -46,7 +51,7 @@ class CartController extends Controller
 	public function index()
 	{
 		$cartItems = Cart::with('product')->where('user_id', Auth::id())->get();
-		return view('carts.index', ['cartItems' => $cartItems]);
+		return view('carts.index', compact('cartItems'));
 	}
 
 
@@ -54,31 +59,23 @@ class CartController extends Controller
 
 	public function removeFromCart(Cart $cart)
 	{
-		$cart->delete();
-		return redirect()->route('cart.index')->with('success', 'Producto eliminado del carrito correctamente.');
 	}
 
 
 
 	public function updateQuantity(Request $request, Cart $cart)
 	{
-		$cart->update(['quantity' => $request->quantity]);
-		return redirect()->route('cart.index')->with('success', 'Cantidad actualizada correctamente.');
 	}
 
 
 
 	public function clearCart()
 	{
-		Cart::where('user_id', Auth::id())->delete();
-		return redirect()->route('cart.index')->with('success', 'Carrito vaciado correctamente.');
 	}
 
 
 
 	public function getTotal()
 	{
-		$total = Cart::where('user_id', Auth::id())->sum('quantity');
-		return view('carts.total', compact('total'));
 	}
 }
