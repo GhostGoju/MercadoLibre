@@ -15,14 +15,12 @@ class UserController extends Controller
 		return view('users.index', compact('users'));
 	}
 
-	// dd($roles[1]->toArray());
+
 
 	public function store(Request $request)
 	{
 		$user = new User($request->all());
 		$user->save();
-		$user->assignRole($request->role);
-		return back();
 	}
 
 
@@ -30,8 +28,6 @@ class UserController extends Controller
 	public function update(UserRequest $request, User $user)
 	{
 		$user->update($request->all());
-		$user->assignRole([$request->role]);
-		return back();
 	}
 
 

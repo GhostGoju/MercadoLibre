@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
 		Route::post('/store', 'store')->name('products.store')->middleware('can:products.store');
 		Route::post('/update/{product}', 'update')->name('products.update')->middleware('can:products.update');
 		Route::delete('/{product}', 'destroy')->name('products.destroy')->middleware('can:products.destroy');
+		Route::get('/products/by-category/{category_id}', 'showByCategory')->name('products.byCategory');
 	});
 
 
@@ -50,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::group(['prefix' => 'carts', 'controller' => CartController::class], function () {
 		Route::get('/', 'index')->name('carts.index');
 		Route::post('/addToCart', 'addToCart')->name('carts.addToCart');
+		Route::post('/removeFromCart', 'removeFromCart')->name('carts.removeFromCart');
 	});
 
 

@@ -26,7 +26,7 @@ class RoleController extends Controller
 
 
 
-	public function update($request, Role $role)
+	public function update($request, $role)
 	{
 		$role->update($request->all());
 	}

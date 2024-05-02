@@ -17,6 +17,8 @@ import EcommerceDetails from './components/Ecommerce/EcommerceDetails.vue'
 
 import Carrito from './components/Cart/Carrito.vue'
 
+// import ProductByCategory from './components/Product/ProductByCategory.vue'
+
 const app = createApp({
 	components: {
 		TheProductList,
@@ -25,6 +27,7 @@ const app = createApp({
 		TheRoleList,
 		EcommerceDetails,
 		Carrito,
+		// ProductByCategory,
 	}
 })
 

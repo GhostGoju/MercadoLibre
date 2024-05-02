@@ -4,9 +4,12 @@
 
     <section class="d-flex flex-wrap justify-content-center" id="productList">
         @foreach ($products->groupBy('category_id') as $categoryId => $groupedProducts)
-            <section class="d-flex gap-2 justify-content-center w-100 border-bottom">
-                <h2>{{ $groupedProducts->first()->category->name }}</h2>
-            </section>
+
+		<section class="d-flex gap-2 justify-content-center w-100 border-bottom">
+			<h2>{{ $groupedProducts->first()->category->name }}</h2>
+			<a href="{{ route('products.byCategory', ['category_id' => $categoryId]) }}">Ver más</a>
+		</section>
+
             @php
                 $count = 0;
             @endphp

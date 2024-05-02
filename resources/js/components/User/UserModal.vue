@@ -48,28 +48,28 @@
 									<span class="invalid-feedback">{{ back_errors['email'] }}</span>
 								</Field>
 							</div>
-							<!-- Password -->
+								<!-- Password -->
 							<div class="col-12 mt-2">
-								<label for="password">Contraseña</label>
-								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
-									<input type="password" id="password" v-model="user.password"
-										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`"
-										v-bind="field">
-									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
-								</Field>
+							    <label for="password">Contraseña</label>
+							    <Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
+							        <input type="password" id="password" v-bind="field"
+							            :class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`">
+							        <span class="invalid-feedback">{{ errorMessage }}</span>
+							        <span class="invalid-feedback">{{ back_errors['password'] }}</span>
+							    </Field>
 							</div>
+
 							<!-- Password Confirmation-->
 							<div class="col-12 mt-2">
-								<label for="password">Confirmacion Contraseña</label>
-								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
-									<input type="password" id="password" v-model="user.password"
-										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`"
-										v-bind="field">
-									<span class="invalid-feedback">{{ errorMessage }}</span>
-									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
-								</Field>
+							    <label for="password_confirmation">Confirmar Contraseña</label>
+							    <Field name="password_confirmation" v-slot="{ errorMessage, field }" v-model="user.password_confirmation">
+							        <input type="password" id="password_confirmation" v-bind="field"
+							            :class="`form-control ${errorMessage || back_errors['password_confirmation'] ? 'is-invalid' : ''}`">
+							        <span class="invalid-feedback">{{ errorMessage }}</span>
+							        <span class="invalid-feedback">{{ back_errors['password_confirmation'] }}</span>
+							    </Field>
 							</div>
+
 							<!-- Role -->
 							<div class="col-12 mt-2" v-if="load_role">
 								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
@@ -111,7 +111,7 @@ export default {
 			this.user = { ...new_value }
 			if (!this.user.id) return
 			this.is_create = false
-			this.role = this.role_id
+			this.role = this.user.role_id
 		}
 	},
 	computed: {

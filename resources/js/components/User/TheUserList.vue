@@ -40,7 +40,7 @@
 						</tbody>
 					</table>
 				</div>
-				<user-modal :user_data="user" vref="user_modal" />
+				<user-modal :user_data="user" ref="user_modal" />
 			</div>
 		</div>
 	</section>
@@ -49,8 +49,6 @@
 <script>
 import UserModal from './UserModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
-
-
 
 export default {
 	components: {

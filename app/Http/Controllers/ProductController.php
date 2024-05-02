@@ -23,11 +23,14 @@ class ProductController extends Controller
 	}
 
 
+
 	public function index()
 	{
 		$products = Product::with('category', 'file')->whereHas('category')->get();
 		return view('products.index', compact('products'));
 	}
+
+
 
 	public function store(ProductRequest $request)
 	{
@@ -42,6 +45,8 @@ class ProductController extends Controller
 			throw $th;
 		}
 	}
+
+
 
 	public function update(ProductUpdateRequest $request, Product $product)
 	{
@@ -63,6 +68,16 @@ class ProductController extends Controller
 		$product = Product::with('category', 'file')->find($id);
 		return view('ecommerces.index', compact('product'));
 	}
+
+
+
+
+	public function showByCategory($categoryId)
+	{
+		$products = Product::where('category_id', $categoryId)->get();
+		return view('products.by_category', compact('products'));
+	}
+
 
 
 	public function destroy(Product $product)
