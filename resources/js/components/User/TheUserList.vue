@@ -75,6 +75,7 @@ export default {
 		},
 		editUser(user) {
 			this.user = user;
+			this.is_create = false;
 			this.openModal()
 		},
 		async deleteUser({ id }) {

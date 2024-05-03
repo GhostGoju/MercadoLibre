@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
@@ -17,7 +16,7 @@ class UserController extends Controller
 
 
 
-	public function store(Request $request)
+	public function store($request)
 	{
 		$user = new User($request->all());
 		$user->save();

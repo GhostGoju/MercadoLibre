@@ -25,3 +25,49 @@ body {
 	background-color: rgb(233, 233, 233) !important;
 }
 
+
+
+
+//? BOTON CARRITO
+
+.first-button {
+	background: rgb(140, 143, 140);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	font-size: 1em;
+	min-height: 60px;
+	width: 200px;
+	gap: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition-duration: 0.6s;
+  }
+
+  .main-section {
+	display: flex;
+	flex-direction: column;
+	height: 60px;
+	overflow: hidden;
+	align-items: flex-start;
+  }
+
+  .main-section:hover .second-button , .main-section:hover .first-button {
+	transform: translateY(-60px);
+  }
+
+  .second-button {
+	background: rgb(209, 15, 57);
+	color: #fff;
+	border: none;
+	font-weight: 700;
+	font-size: 1em;
+	min-height: 60px;
+	width: 200px;
+	gap: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition-duration: 0.6s;
+  }

@@ -41,33 +41,35 @@
 							<div class="col-12 mt-2">
 								<label for="email">Email</label>
 								<Field name="email" v-slot="{ errorMessage, field }" v-model="user.email">
-									<input type="email" id="email" v-model="user.email"
+									<input type="email" id="email" v-model="user.email" autocomplete="username"
 										:class="`form-control ${errorMessage || back_errors['email'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
 									<span class="invalid-feedback">{{ back_errors['email'] }}</span>
 								</Field>
 							</div>
-								<!-- Password -->
+							<!-- Password -->
 							<div class="col-12 mt-2">
-							    <label for="password">Contraseña</label>
-							    <Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
-							        <input type="password" id="password" v-bind="field"
-							            :class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`">
-							        <span class="invalid-feedback">{{ errorMessage }}</span>
-							        <span class="invalid-feedback">{{ back_errors['password'] }}</span>
-							    </Field>
+								<label for="password">Contraseña</label>
+								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
+									<input type="password" id="password" v-bind="field" autocomplete="new-password"
+										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`">
+									<span class="invalid-feedback">{{ errorMessage }}</span>
+									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
+								</Field>
 							</div>
 
 							<!-- Password Confirmation-->
 							<div class="col-12 mt-2">
-							    <label for="password_confirmation">Confirmar Contraseña</label>
-							    <Field name="password_confirmation" v-slot="{ errorMessage, field }" v-model="user.password_confirmation">
-							        <input type="password" id="password_confirmation" v-bind="field"
-							            :class="`form-control ${errorMessage || back_errors['password_confirmation'] ? 'is-invalid' : ''}`">
-							        <span class="invalid-feedback">{{ errorMessage }}</span>
-							        <span class="invalid-feedback">{{ back_errors['password_confirmation'] }}</span>
-							    </Field>
+								<label for="password_confirmation">Confirmar Contraseña</label>
+								<Field name="password_confirmation" v-slot="{ errorMessage, field }"
+									v-model="user.password_confirmation">
+									<input type="password" id="password_confirmation" v-bind="field"
+										autocomplete="new-password"
+										:class="`form-control ${errorMessage || back_errors['password_confirmation'] ? 'is-invalid' : ''}`">
+									<span class="invalid-feedback">{{ errorMessage }}</span>
+									<span class="invalid-feedback">{{ back_errors['password_confirmation'] }}</span>
+								</Field>
 							</div>
 
 							<!-- Role -->
@@ -75,9 +77,8 @@
 								<Field name="role" v-slot="{ errorMessage, field, valid }" v-model="role">
 									<label for="role">Rol</label>
 
-									<v-select id="role" :options="roles_data" v-model="role"
-										:reduce="role => role.id" v-bind="field" label="name"
-										placeholder="Selecciona Rol" :clearable="false"
+									<v-select id="role" :options="roles_data" v-model="role" :reduce="role => role.id"
+										v-bind="field" label="name" placeholder="Selecciona Rol" :clearable="false"
 										:class="`${errorMessage ? 'is-invalid' : ''}`">
 									</v-select>
 									<span class="invalid-feedback" v-if="!valid">{{ errorMessage }}</span>
@@ -108,12 +109,17 @@ export default {
 	components: { Field, Form },
 	watch: {
 		user_data(new_value) {
-			this.user = { ...new_value }
-			if (!this.user.id) return
-			this.is_create = false
-			this.role = this.user.role_id
+			this.user = { ...new_value };
+			if (!this.user.id) {
+				this.is_create = true;
+				this.role = null;
+			} else {
+				this.is_create = false;
+				this.role = this.user.roles[0].id;
+			}
 		}
 	},
+
 	computed: {
 		schema() {
 			return yup.object({
@@ -145,10 +151,15 @@ export default {
 			this.getRoles()
 		},
 
+
+
+
+
 		async saveUser() {
 			try {
 				this.user.role_id = this.role
 				const user = this.createFormData(this.user)
+				console.log("Datos a enviar al servidor:", user); // Agregar esta línea
 				if (this.is_create) await axios.post('/users/store', user)
 				else await axios.post(`/users/update/${this.user.id}`, user)
 				await successMessage({ reload: true })
@@ -156,6 +167,20 @@ export default {
 				this.back_errors = await handlerErrors(error)
 			}
 		},
+
+
+
+		// async saveUser() {
+		// 	try {
+		// 		this.user.role_id = this.role
+		// 		const user = this.createFormData(this.user)
+		// 		if (this.is_create) await axios.post('/users/store', user)
+		// 		else await axios.post(`/users/update/${this.user.id}`, user)
+		// 		await successMessage({ reload: true })
+		// 	} catch (error) {
+		// 		this.back_errors = await handlerErrors(error)
+		// 	}
+		// },
 		createFormData(data) {
 			const form_data = new FormData()
 			for (const prop in data) {
