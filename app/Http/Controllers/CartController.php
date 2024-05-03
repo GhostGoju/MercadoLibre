@@ -21,26 +21,21 @@ class CartController extends Controller
 		if (Auth::check()) {
 			$productId = $request->input('product_id');
 			$quantity = $request->input('quantity');
-
 			$product = Product::findOrFail($productId);
-
 			$cart = Cart::where('user_id', Auth::id())
 				->where('product_id', $productId)
 				->first();
-
 			if ($cart) {
 				$cart->quantity += $quantity;
 				$cart->save();
 			} else {
-
 				Cart::create([
 					'user_id' => Auth::id(),
 					'product_id' => $productId,
 					'quantity' => $quantity,
 				]);
 			}
-
-			return redirect()->route('carts.index');
+			return back();
 		} else {
 			return redirect()->route('login');
 		}
@@ -51,32 +46,50 @@ class CartController extends Controller
 	public function index()
 	{
 		$cartItems = Cart::with('product')->where('user_id', Auth::id())->get();
-		// dd($cartItems[0]->toArray());
 		return view('carts.index', compact('cartItems'));
 	}
 
 
 
-
 	public function removeFromCart(Cart $cart)
 	{
+		if (Auth::id() !== $cart->user_id) {
+			return redirect()->back()->with('error', 'No tienes permiso para eliminar este producto del carrito.');
+		}
+		$cart->delete();
+		return redirect()->route('carts.index');
 	}
 
 
 
 	public function updateQuantity(Request $request, Cart $cart)
 	{
+		if (Auth::id() !== $cart->user_id) {
+			return redirect()->back();
+		}
+		$request->validate([
+			'quantity' => 'required|integer|min:1',
+		]);
+
+		$cart->quantity = $request->quantity;
+		$cart->save();
+
+		return redirect()->route('carts.index');
 	}
 
 
 
 	public function clearCart()
 	{
+		Cart::where('user_id', Auth::id())->delete();
+		return redirect()->route('carts.index');
 	}
 
 
 
 	public function getTotal()
 	{
+		$total = Cart::where('user_id', Auth::id())->sum('quantity');
+		return $total;
 	}
 }

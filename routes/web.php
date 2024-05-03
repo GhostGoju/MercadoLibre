@@ -49,10 +49,14 @@ Route::group(['middleware' => ['auth']], function () {
 
 	//Carrito
 	Route::group(['prefix' => 'carts', 'controller' => CartController::class], function () {
-		Route::get('/', 'index')->name('carts.index');
-		Route::post('/addToCart', 'addToCart')->name('carts.addToCart');
-		Route::post('/removeFromCart', 'removeFromCart')->name('carts.removeFromCart');
+		Route::get('/', 'index')->name('carts.index')->middleware('can:carts.index');
+		Route::post('/addToCart', 'addToCart')->name('carts.addToCart')->middleware('can:carts.addToCart');
+		Route::post('/removeFromCart/{cart}', 'removeFromCart')->name('carts.removeFromCart')->middleware('can:carts.removeFromCart');
+		Route::post('/updateQuantity/{cart}', 'updateQuantity')->name('carts.updateQuantity')->middleware('can:carts.updateQuantity');
+		Route::post('/clearCart', 'clearCart')->name('carts.clearCart')->middleware('can:carts.clearCart');
+		Route::get('/getTotal', 'getTotal')->name('carts.getTotal')->middleware('can:carts.getTotal');
 	});
+
 
 
 	// Roles

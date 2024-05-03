@@ -12,12 +12,16 @@ class RoleAndPermissionSeeder extends Seeder
 	public function run()
 	{
 		$permissionsAdmin = [
+
+			//? GESTION DE PRODUCTOS
 			'products.index',
 			'products.create',
 			'products.store',
 			'products.update',
 			'products.destroy',
 			'products.byCategory',
+
+			//? GESTION DE CATEGORIAS
 			'categories.index',
 			'categories.get-all',
 			'categories.create',
@@ -25,12 +29,16 @@ class RoleAndPermissionSeeder extends Seeder
 			'categories.edit',
 			'categories.update',
 			'categories.destroy',
+
+			//? GESTION DE USUARIOS
 			'users.index',
 			'users.create',
 			'users.store',
 			'users.edit',
 			'users.update',
 			'users.destroy',
+
+			//? GESTION DE ROLES
 			'roles.index',
 			'roles.get-all',
 			'roles.create',
@@ -38,6 +46,14 @@ class RoleAndPermissionSeeder extends Seeder
 			'roles.edit',
 			'roles.update',
 			'roles.destroy',
+
+			//? CARRITO
+			'carts.index',
+			'carts.addToCart',
+			'carts.removeFromCart',
+			'carts.updateQuantity',
+			'carts.clearCart',
+			'carts.getTotal',
 		];
 
 		// Roles
