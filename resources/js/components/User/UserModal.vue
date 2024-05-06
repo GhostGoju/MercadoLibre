@@ -152,14 +152,10 @@ export default {
 		},
 
 
-
-
-
 		async saveUser() {
 			try {
 				this.user.role_id = this.role
 				const user = this.createFormData(this.user)
-				console.log("Datos a enviar al servidor:", user); // Agregar esta línea
 				if (this.is_create) await axios.post('/users/store', user)
 				else await axios.post(`/users/update/${this.user.id}`, user)
 				await successMessage({ reload: true })
@@ -169,18 +165,6 @@ export default {
 		},
 
 
-
-		// async saveUser() {
-		// 	try {
-		// 		this.user.role_id = this.role
-		// 		const user = this.createFormData(this.user)
-		// 		if (this.is_create) await axios.post('/users/store', user)
-		// 		else await axios.post(`/users/update/${this.user.id}`, user)
-		// 		await successMessage({ reload: true })
-		// 	} catch (error) {
-		// 		this.back_errors = await handlerErrors(error)
-		// 	}
-		// },
 		createFormData(data) {
 			const form_data = new FormData()
 			for (const prop in data) {
