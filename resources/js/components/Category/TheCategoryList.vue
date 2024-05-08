@@ -41,10 +41,12 @@
 </template>
 
 <script>
+
 import CategoryModal from './CategoryModal.vue';
 import { deleteMessage, successMessage } from '@/helpers/Alerts.js'
 
 export default {
+
 	components: {
 		CategoryModal
 	},
@@ -55,6 +57,7 @@ export default {
 			category: {}
 		}
 	},
+
 	mounted() {
 		this.index()
 	},

@@ -11,6 +11,10 @@
     {{-- Title --}}
     <title>{{ env('APP_NAME') }} | {{ $title ?? 'ML' }}</title>
 
+
+	 <!-- Favicon -->
+	 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/storage/Icons/pic.ico') }}">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>

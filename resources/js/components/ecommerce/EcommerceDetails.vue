@@ -57,6 +57,7 @@
 
 <script>
 import axios from 'axios';
+import { handlerErrors, successMessage } from '@/helpers/Alerts.js';
 
 export default {
 	props: {
@@ -66,22 +67,23 @@ export default {
 		}
 	},
 	methods: {
-		addToCart(productId, quantity) {
-			axios
-				.post('/carts/addToCart', {
-					product_id: productId,
-					quantity: quantity
-				})
-				.then(response => {
-					alert('Producto agregado al carrito');
-				})
-				.catch(error => {
-					alert('Es necesario iniciar sesión para agregar productos al carrito');
-				});
+		async addToCart(productId, quantity) {
+			try {
+				if (this.is_create) {
+					await axios.post('/carts/addToCart', {
+						product_id: productId,
+						quantity: quantity
+					});
+				}
+				await successMessage({ reload: true });
+			} catch (error) {
+				this.back_errors = await handlerErrors(error);
+			}
 		}
 	}
 }
 </script>
+
 
 <style>
 .btn-carrito-ecommerce {

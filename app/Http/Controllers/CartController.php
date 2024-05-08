@@ -34,9 +34,6 @@ class CartController extends Controller
 					'quantity' => $quantity,
 				]);
 			}
-			return response()->json(['message' => 'Product added to cart successfully']);
-		} else {
-			return response()->json(['message' => 'User not authenticated'], 401);
 		}
 	}
 

@@ -41,7 +41,7 @@
 							<div class="col-12 mt-2">
 								<label for="email">Email</label>
 								<Field name="email" v-slot="{ errorMessage, field }" v-model="user.email">
-									<input type="email" id="email" v-model="user.email" autocomplete="username"
+									<input type="email" id="email" v-model="user.email"
 										:class="`form-control ${errorMessage || back_errors['email'] ? 'is-invalid' : ''}`"
 										v-bind="field">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
@@ -52,7 +52,7 @@
 							<div class="col-12 mt-2">
 								<label for="password">Contraseña</label>
 								<Field name="password" v-slot="{ errorMessage, field }" v-model="user.password">
-									<input type="password" id="password" v-bind="field" autocomplete="new-password"
+									<input type="password" id="password" v-bind="field"
 										:class="`form-control ${errorMessage || back_errors['password'] ? 'is-invalid' : ''}`">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
 									<span class="invalid-feedback">{{ back_errors['password'] }}</span>
@@ -65,7 +65,6 @@
 								<Field name="password_confirmation" v-slot="{ errorMessage, field }"
 									v-model="user.password_confirmation">
 									<input type="password" id="password_confirmation" v-bind="field"
-										autocomplete="new-password"
 										:class="`form-control ${errorMessage || back_errors['password_confirmation'] ? 'is-invalid' : ''}`">
 									<span class="invalid-feedback">{{ errorMessage }}</span>
 									<span class="invalid-feedback">{{ back_errors['password_confirmation'] }}</span>
