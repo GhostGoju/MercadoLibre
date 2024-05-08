@@ -1,9 +1,6 @@
 <template>
 	<section>
 		<div class="card cart-container">
-			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="clearCart">Vaciar Carrito</button>
-			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">
 					<table class="table cart-table">
@@ -21,7 +18,7 @@
 								<td>{{ item.product.name }}</td>
 								<td>
 									<input type="number" v-model="item.quantity" @change="updateQuantity(item)"
-										class="form-control">
+										class="form-control" style="width: 60px; display: inline-block;">
 								</td>
 								<td>$ {{ item.product.price }}</td>
 								<td>$ {{ getTotalPrice(item) }}</td>
@@ -34,12 +31,16 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="total">Total a Pagar: $ {{ calculateTotal() }}</div>
+				<div class="total" style="font-weight: bold; font-size:18px; display: flex; justify-content: right;  margin-right: 5rem">Total: $ {{ calculateTotal() }}
+				</div>
 			</div>
 		</div>
 
+
+
 		<!-- BOTON DE COMPRAR -->
-		<div class="pay-btn-container">
+
+		<div class="pay-btn-container" style="display: flex; justify-content: center;">
 			<button class="Btn" @click="pay">
 				Pay
 				<svg viewBox="0 0 576 512" class="svgIcon">
@@ -50,12 +51,12 @@
 			</button>
 		</div>
 
+
 	</section>
 </template>
 
 <script>
 import axios from 'axios';
-
 
 export default {
 	props: {
@@ -83,12 +84,15 @@ export default {
 				console.error(error);
 			}
 		},
-		async clearCart() {
-			try {
-				await axios.post('/carts/clearCart');
-				this.cartitems = [];
-			} catch (error) {
-				console.error(error);
+
+		increaseQuantity(item) {
+			item.quantity++;
+			this.updateQuantity(item);
+		},
+		decreaseQuantity(item) {
+			if (item.quantity > 1) {
+				item.quantity--;
+				this.updateQuantity(item);
 			}
 		},
 		getTotalPrice(item) {
@@ -97,15 +101,20 @@ export default {
 		calculateTotal() {
 			return this.cartitems.reduce((total, item) => total + this.getTotalPrice(item), 0);
 		},
+		pay() {
+			// Lógica para procesar el pago
+		}
 	}
 }
 </script>
 
 <style scoped>
+
+
 .pay-btn-container {
 	display: flex;
 	justify-content: flex-end;
-	padding: 10px;
+	padding: 30px;
 }
 
 .Btn {

@@ -12,23 +12,23 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <!-- Barra de búsqueda -->
-                <form class="d-flex">
+                <form class="d-flex ms-5"> <!-- Agrega una clase 'ms-3' para el margen a la izquierda -->
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"
                         id="searchInput">
                 </form>
             </ul>
 
-
-
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
 
+
                 {{-- CARRITO --}}
-                <li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('carts.index') }}">
                         <i class="fa-solid fa-cart-plus"></i>
                     </a>
                 </li>
+
 
                 <!-- Authentication Links -->
                 @guest
@@ -62,25 +62,27 @@
                                     Usuarios
                                 </a>
                             @endrole
+
                             @role('Admin')
                                 {{-- Book --}}
                                 <a class="dropdown-item" href="{{ route('products.index') }}">
                                     Productos
                                 </a>
                             @endrole
+
                             @role('Admin')
                                 {{-- Category --}}
                                 <a class="dropdown-item" href="{{ route('categories.index') }}">
                                     Categorias
                                 </a>
                             @endrole
-                            {{-- @role('Admin') --}}
-                                {{-- Role --}}
-                                {{-- <a class="dropdown-item" href="{{ route('roles.index') }}">
-                                    Roles
-                                </a> --}}
-                            {{-- @endrole --}}
 
+                            @role('Admin')
+                                {{-- Role --}}
+                                <a class="dropdown-item" href="{{ route('roles.index') }}">
+                                    Roles
+                                </a>
+                            @endrole
 
                             {{-- Logout --}}
                             <a class="dropdown-item" href="{{ route('logout') }}"
@@ -92,7 +94,6 @@
                                 @csrf
                             </form>
                         </div>
-
                     </li>
                 @endguest
             </ul>

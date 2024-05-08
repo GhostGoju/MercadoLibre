@@ -17,7 +17,6 @@ class CartController extends Controller
 
 	public function addToCart(Request $request)
 	{
-
 		if (Auth::check()) {
 			$productId = $request->input('product_id');
 			$quantity = $request->input('quantity');
@@ -35,9 +34,9 @@ class CartController extends Controller
 					'quantity' => $quantity,
 				]);
 			}
-			return back();
+			return response()->json(['message' => 'Product added to cart successfully']);
 		} else {
-			return redirect()->route('login');
+			return response()->json(['message' => 'User not authenticated'], 401);
 		}
 	}
 
@@ -76,15 +75,6 @@ class CartController extends Controller
 
 		return redirect()->route('carts.index');
 	}
-
-
-
-	public function clearCart()
-	{
-		Cart::where('user_id', Auth::id())->delete();
-		return redirect()->route('carts.index');
-	}
-
 
 
 	public function getTotal()

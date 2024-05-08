@@ -13,6 +13,17 @@ use App\Http\Controllers\RoleController;
 Auth::routes();
 Route::get('/', [ProductController::class, 'home'])->name('products.home');
 
+
+//? RUTAS ACCESIBLES SIN NECESIDAD DE AUTENTIFICACION
+Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
+	Route::get('/show/{product}', 'show')->name('products.show');
+	Route::get('/by-category/{category_id}', 'showByCategory')->name('products.byCategory');
+});
+
+
+
+//? RUTAS PROTEGIDAS
+
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/home', [HomeController::class, 'home'])->name('home');
 
@@ -28,11 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
 	// Product
 	Route::group(['prefix' => 'products', 'controller' => ProductController::class], function () {
 		Route::get('/', 'index')->name('products.index')->middleware('can:products.index');
-		Route::get('/show/{product}', 'show')->name('products.show');
 		Route::post('/store', 'store')->name('products.store')->middleware('can:products.store');
 		Route::post('/update/{product}', 'update')->name('products.update')->middleware('can:products.update');
 		Route::delete('/{product}', 'destroy')->name('products.destroy')->middleware('can:products.destroy');
-		Route::get('/products/by-category/{category_id}', 'showByCategory')->name('products.byCategory');
 	});
 
 
