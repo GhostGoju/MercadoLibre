@@ -46,14 +46,6 @@ class RoleAndPermissionSeeder extends Seeder
 			'roles.edit',
 			'roles.update',
 			'roles.destroy',
-
-			//? CARRITO
-			// 'carts.index',
-			// 'carts.addToCart',
-			// 'carts.removeFromCart',
-			// 'carts.updateQuantity',
-			// 'carts.clearCart',
-			// 'carts.getTotal',
 		];
 
 		// Roles
