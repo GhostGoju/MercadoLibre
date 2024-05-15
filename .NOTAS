@@ -1,0 +1,10 @@
+<!-- DENTRO DE LOS TEST EL HELPER actingAs, simula la autenticacion de un usuario -->
+
+public function test_authenticated_user_can_access_dashboard()
+{
+$user = User::factory()->create();
+
+$response = $this->actingAs($user)->get('/dashboard');
+
+$response->assertStatus(200);
+}
