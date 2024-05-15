@@ -17,7 +17,7 @@ class UserFactory extends Factory
 			'name' => fake()->name(),
 			'last_name' => fake()->lastName(),
 			'email' => fake()->unique()->safeEmail(),
-			'password' => Hash::make('123456789'), // Encriptar la contraseña
+			'password' => Hash::make('123456789'),
 			'remember_token' => Str::random(10),
 		];
 	}
@@ -25,7 +25,7 @@ class UserFactory extends Factory
 	public function configure()
 	{
 		return $this->afterCreating(function (User $user) {
-			$user->assignRole('User'); // Asignar rol al usuario
+			$user->assignRole('User');
 		});
 	}
 }

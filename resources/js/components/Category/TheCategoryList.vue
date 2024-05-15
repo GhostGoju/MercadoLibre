@@ -2,7 +2,7 @@
 	<section>
 		<div class="card">
 			<div class="card-header d-flex justify-content-end">
-				<button class="btn btn-primary" @click="openModal">Crear Categoria</button>
+<button class="btn btn-primary" @click="openModal">Crear Categoria</button>
 			</div>
 			<div class="card-body">
 				<div class="table-responsive my-4 mx-2">

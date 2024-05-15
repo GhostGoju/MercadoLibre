@@ -3,9 +3,19 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class HomePerformanceTest extends TestCase
 {
+
+
+	//? PRUEBA DE RENDIMIENTO
+
+
+	use WithFaker, DatabaseTransactions;
+
+
 	public function testHomePageLoadsInUnder500Milliseconds()
 	{
 
