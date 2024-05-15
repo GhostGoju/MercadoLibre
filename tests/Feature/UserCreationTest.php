@@ -9,6 +9,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserCreationTest extends TestCase
 {
+
+	//? PRUEBA DE END TO END ( INTEGRACION )
+
+
 	use WithFaker, DatabaseTransactions; 												//? DatabaseTransactions se borra de aqui si quiero ver como quedo insertado el registro
 
 	/** @test */
